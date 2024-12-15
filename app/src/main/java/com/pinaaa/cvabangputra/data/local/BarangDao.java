@@ -4,5 +4,6 @@ import androidx.room.Dao;
 
 @Dao
 interface BarangDao {
+    //ini adalah class untuk mengakses database
 
 }
