@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">cvabangputra</string>
+    <string name="title_menu_1">Selamat Datang</string>
+    <string name="desc_menu_1">Cv Abang Putra Grosir adalah tempat barang seperti sandal, sepatu, tas dan aksesoris lainnya dengan harga murah dan grosir</string>
+    <string name="title_menu_2">Banyak macam pilihan</string>
+    <string name="desc_menu_2">berbagai merek berkualitas dan sudah teruji dengan baik</string>
+    <string name="title_menu_3">harga grosir paling murah di batam</string>
+    <string name="desc_menu_3">harga mulai dari Rp.50.000 saja sudah dapat barang mewah di toki</string>
+    <string name="title_menu_4">lebih mudah melalui aplikasi</string>
+    <string name="desc_menu_4">aplikasi yang memudahkan tanpa perlu datang ke toko untuk melihat barang</string>
+    <string name="learn_now">mulai sekarang!</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="lupa_password">lupa password?</string>
+    <string name="dont_have_account">dont have account?</string>
+    <string name="daftar">sign up</string>
+    <string name="login">login</string>
+    <string name="persyaratan">Dengan menekan tombol buat akun\nanda  setuju dengan syarat dan ketentuan</string>
+    <string name="already_have_account">already have account?</string>
+    <string name="register">register</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="beranda">beranda</string>
+    <string name="search">search</string>
+    <string name="favorite">favorite</string>
+    <string name="profil">profil</string>
+</resources>
