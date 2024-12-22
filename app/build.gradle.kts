@@ -16,6 +16,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://api.edamam.com/api/food-database/v2/\"")
+
     }
 
     buildTypes {
@@ -81,7 +84,15 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(platform(libs.androidx.compose.bom))
 
-    ksp("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-paging:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
+    implementation(libs.lottie)
+    implementation(libs.fragmentKtx)
+
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.room.ktx)
+
+    implementation(libs.imageslideshow)
+    implementation(libs.androidx.swiperefreshlayout)
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
 }

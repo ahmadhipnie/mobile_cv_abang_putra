@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <item-->
-<!--        android:id="@+id/menu_beranda_admin"-->
-<!--        android:icon="@drawable/ic_home_selector"-->
-<!--        android:title="@string/beranda" />-->
-<!--    <item-->
-<!--        android:id="@+id/menu_pesanan_admin"-->
-<!--        android:icon="@drawable/ic_pesanan_selector"-->
-<!--        android:title="@string/pesanan" />-->
-<!--    <item-->
-<!--        android:id="@+id/menu_keranjang_pelanggan"-->
-<!--        android:icon="@drawable/ic_keranjang_selector"-->
-<!--        android:title="@string/keranjang" />-->
+    <item
+        android:id="@+id/menu_beranda_admin"
+        android:icon="@drawable/ic_home_selector"
+        android:title="@string/beranda" />
+    <item
+        android:id="@+id/menu_stok_admin"
+        android:icon="@drawable/ic_pesanan_selector"
+        android:title="@string/pesanan" />
+    <item
+        android:id="@+id/menu_keranjang_pelanggan"
+        android:icon="@drawable/ic_keranjang_selector"
+        android:title="@string/stok" />
 
-<!--    <item-->
-<!--        android:id="@+id/menu_profil_admin"-->
-<!--        android:icon="@drawable/ic_profil_selector"-->
-<!--        android:title="@string/profil" />-->
+    <item
+        android:id="@+id/menu_profil_admin"
+        android:icon="@drawable/ic_profil_selector"
+        android:title="@string/profil" />
 </menu>

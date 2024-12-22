@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-//@Database(entities = [BarangEntity::class], version = 1, exportSchema = false)
+@Database(entities = [BarangEntity::class], version = 1, exportSchema = false)
 abstract class BarangDatabase : RoomDatabase() {
-//    abstract fun barangDao(): BarangDao
+    abstract fun barangDao(): BarangDao
 
     companion object{
         @Volatile

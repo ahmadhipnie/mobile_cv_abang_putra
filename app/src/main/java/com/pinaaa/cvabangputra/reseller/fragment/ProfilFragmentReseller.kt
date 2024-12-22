@@ -1,60 +1,54 @@
 package com.pinaaa.cvabangputra.reseller.fragment
 
+import android.content.ContentValues.TAG
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import com.pinaaa.cvabangputra.R
+import com.pinaaa.cvabangputra.databinding.FragmentProfilResellerBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfilFragmentReseller.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfilFragmentReseller : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentProfilResellerBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil_reseller, container, false)
+        _binding = FragmentProfilResellerBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfilFragmentReseller.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfilFragmentReseller().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        sharedPreferences = requireActivity().getSharedPreferences("USER", MODE_PRIVATE)
+
+        binding.btnLogoutReseller.setOnClickListener {
+            sharedPreferences.edit().clear().apply()
+            requireActivity().finish()
+        }
+
+        Log.d(TAG, "email: ${sharedPreferences.getString("email", "")}")
+        Log.d(TAG, "password: ${sharedPreferences.getString("password", "")}")
+        Log.d(TAG, "role: ${sharedPreferences.getString("role", "")}")
+        Log.d(TAG, "id_reseller: ${sharedPreferences.getString("id_reseller", "")}")
+        Log.d(TAG, "user_id: ${sharedPreferences.getString("user_id", "")}")
+        Log.d(TAG, "nama: ${sharedPreferences.getString("nama", "")}")
+        Log.d(TAG, "alamat: ${sharedPreferences.getString("alamat", "")}")
+        Log.d(TAG, "nomor_telepon: ${sharedPreferences.getString("nomor_telepon", "")}")
+        Log.d(TAG, "tanggal_lahir: ${sharedPreferences.getString("tanggal_lahir", "")}")
+        Log.d(TAG, "foto_profil: ${sharedPreferences.getString("foto_profil", "")}")
+        Log.d(TAG, "isLoggedInReseller: ${sharedPreferences.getBoolean("isLoggedInReseller", false)}")
     }
 }

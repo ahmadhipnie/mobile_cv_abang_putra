@@ -2,17 +2,22 @@ package com.pinaaa.cvabangputra
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.pinaaa.cvabangputra.admin.ui.MainActivityAdmin
 import com.pinaaa.cvabangputra.databinding.ActivityMainBinding
+import com.pinaaa.cvabangputra.reseller.ui.MainActivityReseller
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +30,41 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        sharedPreferences = getSharedPreferences("USER", MODE_PRIVATE)
+
         // Display splash screen for a while (1 second here)
         Handler().postDelayed({
             if (onBoardingIsFinished()) {
-                // After the splash screen, open LoginActivity
-                startActivity(Intent(this, LoginActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)  // Fade-in and fade-out transition
+                if (sharedPreferences.getBoolean("isLoggedInAdmin", false)) {
+                    startActivity(Intent(this, MainActivityAdmin::class.java))
+                    overridePendingTransition(
+                        R.anim.fade_in,
+                        R.anim.fade_out
+                    )  // Fade-in and fade-out transition
+                } else if (sharedPreferences.getBoolean("isLoggedInReseller", false)) {
+                    startActivity(Intent(this, MainActivityReseller::class.java))
+                    overridePendingTransition(
+                        R.anim.fade_in,
+                        R.anim.fade_out
+                    )  // Fade-in and fade-out transition
+
+                } else {
+
+                    // After the splash screen, open LoginActivity
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    overridePendingTransition(
+                        R.anim.fade_in,
+                        R.anim.fade_out
+                    )  // Fade-in and fade-out transition
+
+                }
             } else {
                 // After the splash screen, open OnboardingActivity
                 startActivity(Intent(this, OnboardingActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)  // Fade-in and fade-out transition
+                overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )  // Fade-in and fade-out transition
             }
             finish()  // Close MainActivity after transition
         }, 1000)  // 1000 ms = 1 second

@@ -24,4 +24,6 @@
     <string name="search">search</string>
     <string name="favorite">favorite</string>
     <string name="profil">profil</string>
+    <string name="stok">stok</string>
+    <string name="pesanan">pesanan</string>
 </resources>
