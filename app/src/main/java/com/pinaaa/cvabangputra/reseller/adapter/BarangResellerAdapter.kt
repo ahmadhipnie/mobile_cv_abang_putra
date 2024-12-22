@@ -20,7 +20,7 @@ class BarangResellerAdapter : ListAdapter<DataBarangItem, BarangResellerAdapter.
         fun bind(data: DataBarangItem) {
             // Bind data to view
             binding.tvNamaBarang.text = data.namaBarang
-            binding.tvHargaBarang.text = "Rp ${data.hargaBarang}"
+            binding.tvHargaBarang.text = "IDR ${data.hargaBarang}"
             // Lakukan binding untuk gambar menggunakan Glide, misalnya
             Glide.with(itemView.context)
                 .load(apiConfig.URL+data.gambarUrl)

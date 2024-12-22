@@ -44,9 +44,9 @@
             app:iss_auto_cycle="true"
             app:iss_corner_radius="10"
             app:iss_delay="0"
-            app:iss_error_image="@drawable/img_logo"
+            app:iss_error_image="@drawable/img_login"
             app:iss_period="1000"
-            app:iss_placeholder="@drawable/img_logo"
+            app:iss_placeholder="@drawable/img_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_nama_user_beranda_reseller"/>

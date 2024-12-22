@@ -13,6 +13,7 @@ import retrofit2.http.POST
 
 interface ApiService {
 
+    // API UNTUK ADMIN
     @FormUrlEncoded
     @POST("login")
     suspend fun login(
@@ -20,6 +21,14 @@ interface ApiService {
         @Field("password") password: String
     ) : LoginResponse
 
+
+
+
+
+
+
+
+    // API UNTUK RESELLER
     @GET("getAllKategori")
     fun getKategori(): Call<KategoriResponse>
 

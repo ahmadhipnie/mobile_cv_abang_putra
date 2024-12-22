@@ -22,7 +22,7 @@
             android:id="@+id/img_logo_splash"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_logo"
+            android:src="@drawable/img_login"
             android:layout_margin="50dp"
             />
 
