@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class BerandaResellerViewModel(private val repository: Repository) : ViewModel() {
 
-
     private val _kategori = MutableLiveData<List<DataItem>>()
     val kategori: LiveData<List<DataItem>> get() = _kategori
 

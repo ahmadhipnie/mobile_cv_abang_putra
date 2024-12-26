@@ -4,8 +4,11 @@ import com.pinaaa.cvabangputra.data.remote.ApiService
 import com.pinaaa.cvabangputra.data.remote.response.LoginResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.BarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataBarangItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataGambarBarangItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.GambarBarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.KategoriResponse
+import retrofit2.Call
 import retrofit2.awaitResponse
 
 
@@ -17,23 +20,19 @@ class Repository private constructor(private val apiService: ApiService) {
     }
 
     suspend fun getKategori(): List<DataItem> {
-        val response = apiService.getKategori().awaitResponse()
-        if (response.isSuccessful) {
-            val kategoriResponse: KategoriResponse? = response.body()
-            return kategoriResponse?.listData?.filterNotNull() ?: emptyList()
-        } else {
-            throw Exception("Failed to fetch categories: ${response.code()} ${response.message()}")
-        }
+        // Pemanggilan API secara langsung menggunakan suspend function
+        val response = apiService.getKategori()
+        return response.listData?.filterNotNull() ?: emptyList()  // Mengambil data kategori
     }
 
     suspend fun getBarang(): List<DataBarangItem> {
-        val response = apiService.getBarang().awaitResponse()
-        if (response.isSuccessful) {
-            val barangResponse: BarangResponse? = response.body()
-            return barangResponse?.dataBarang?.filterNotNull() ?: emptyList()
-        } else {
-            throw Exception("Failed to fetch barangs: ${response.code()} ${response.message()}")
-        }
+        // Pemanggilan API secara langsung menggunakan suspend function
+        val response = apiService.getBarang()
+        return response.dataBarang?.filterNotNull() ?: emptyList()  // Mengambil data barang
+    }
+    suspend fun getImagesBarangByIdBarang(id_barang: Int): List<DataGambarBarangItem> {
+        val gambarBarangResponse = apiService.getImagesBarangByIdBarang(id_barang)
+        return gambarBarangResponse.dataGambarBarang?.filterNotNull() ?: emptyList()
     }
 
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.pinaaa.cvabangputra.data.remote.response.LoginResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.BarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.GambarBarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.KategoriResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -13,7 +14,6 @@ import retrofit2.http.POST
 
 interface ApiService {
 
-    // API UNTUK ADMIN
     @FormUrlEncoded
     @POST("login")
     suspend fun login(
@@ -22,18 +22,18 @@ interface ApiService {
     ) : LoginResponse
 
 
+    @FormUrlEncoded
+    @POST("getImagesBarangByIdBarang")
+    suspend fun getImagesBarangByIdBarang(
+        @Field("id_barang") id_barang: Int
+    ): GambarBarangResponse
 
 
-
-
-
-
-    // API UNTUK RESELLER
     @GET("getAllKategori")
-    fun getKategori(): Call<KategoriResponse>
+    suspend fun getKategori(): KategoriResponse
 
 
     @GET("getAllBarang")
-    fun getBarang(): Call<BarangResponse>
+    suspend fun getBarang(): BarangResponse
 
 }

@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
     <application
@@ -19,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cvabangputra"
         tools:targetApi="31">
+        <activity
+            android:name=".reseller.ui.DetailBarangActivityReseller"
+            android:exported="false" />
         <activity
             android:name=".reseller.ui.MainActivityReseller"
             android:exported="false" />
@@ -44,9 +48,22 @@
             </intent-filter>
         </activity>
 
+        <!-- FileProvider for sharing files securely -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Preloaded Fonts (optional) -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

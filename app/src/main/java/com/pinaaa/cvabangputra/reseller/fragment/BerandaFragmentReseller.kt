@@ -34,32 +34,31 @@ class BerandaFragmentReseller : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentBerandaResellerBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        // Menampilkan nama user dari sharedPreferences
         sharedPreferences = requireActivity().getSharedPreferences("USER", MODE_PRIVATE)
-
         binding.tvNamaUserBerandaReseller.text = sharedPreferences.getString("nama", "")
 
+        // Menyiapkan RecyclerView untuk kategori dan barang
         setupRecyclerView()
         setupRecyclerViewBarang()
-        observeViewModel()
-        observebarangViewModel()
-    }
 
-    private fun setupRecyclerViewBarang() {
-        val barangAdapter = BarangResellerAdapter()
-        binding.rvPalingBanyakDibeliBerandaReseller.apply {
-            // Menggunakan GridLayoutManager untuk 2 kolom vertikal
-            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-            adapter = barangAdapter
-            setHasFixedSize(true)
-        }    }
+        // Menampilkan loading sebelum data selesai
+        showLoading(true)
+
+        // Memanggil API untuk kategori dan barang
+        berandaResellerViewModel.getKategori()
+        berandaResellerViewModel.getBarang()
+
+        // Mengamati perubahan pada data kategori dan barang
+        observeViewModel()
+
+        // Mengamati error jika ada
+        observeBarangViewModel()
+
+        return binding.root
+    }
 
     private fun setupRecyclerView() {
         val kategoriResellerAdapter = KategoriResellerAdapter()
@@ -68,28 +67,23 @@ class BerandaFragmentReseller : Fragment() {
             adapter = kategoriResellerAdapter
             setHasFixedSize(true)
         }
+    }
 
-
+    private fun setupRecyclerViewBarang() {
+        val barangAdapter = BarangResellerAdapter()
+        binding.rvPalingBanyakDibeliBerandaReseller.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = barangAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun observeViewModel() {
         berandaResellerViewModel.kategori.observe(viewLifecycleOwner) { kategoriList ->
             (binding.rvKategoriBerandaReseller.adapter as KategoriResellerAdapter).submitList(kategoriList)
+            checkDataLoaded()  // Cek apakah data sudah lengkap untuk ditampilkan
         }
 
-        berandaResellerViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-                Log.e(TAG, "observeViewModel: ", Throwable(errorMessage))
-            } else {
-                Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        berandaResellerViewModel.getKategori()
-    }
-
-    private fun observebarangViewModel() {
         berandaResellerViewModel.barang.observe(viewLifecycleOwner) { barangList ->
             if (barangList != null && barangList.isNotEmpty()) {
                 (binding.rvPalingBanyakDibeliBerandaReseller.adapter as BarangResellerAdapter).submitList(barangList)
@@ -97,17 +91,37 @@ class BerandaFragmentReseller : Fragment() {
                 Toast.makeText(context, "Data barang kosong", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun observeBarangViewModel() {
+        berandaResellerViewModel.barang.observe(viewLifecycleOwner) { barangList ->
+            if (barangList != null && barangList.isNotEmpty()) {
+                (binding.rvPalingBanyakDibeliBerandaReseller.adapter as BarangResellerAdapter).submitList(barangList)
+            } else {
+                Toast.makeText(context, "Data barang kosong", Toast.LENGTH_SHORT).show()
+            }
+            checkDataLoaded()  // Cek apakah data sudah lengkap untuk ditampilkan
+        }
 
         berandaResellerViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "observeBarangViewModel: $errorMessage")
             } else {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error loading barang", Toast.LENGTH_SHORT).show()
             }
         }
-
-        berandaResellerViewModel.getBarang()  // Memanggil API untuk mengambil barang
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        // Menampilkan atau menyembunyikan loading indicator
+        binding.progressBarBerandaReseller.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 
+    private fun checkDataLoaded() {
+        // Cek apakah kategori dan barang sudah ter-load dan tampilkan RecyclerView jika sudah lengkap
+        if (berandaResellerViewModel.kategori.value != null && berandaResellerViewModel.barang.value != null) {
+            showLoading(false)  // Sembunyikan loading setelah data selesai dimuat
+        }
+    }
 }

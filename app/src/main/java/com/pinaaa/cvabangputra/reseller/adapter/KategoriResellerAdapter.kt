@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
 import com.pinaaa.cvabangputra.databinding.KategoriItemBinding
@@ -16,6 +17,7 @@ class KategoriResellerAdapter: ListAdapter<DataItem, KategoriResellerAdapter.Vie
 
     private val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
 
+    @GlideModule
     inner class ViewHolder(private val binding: KategoriItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val ivKategori: ImageView = binding.ivLogoKategori
