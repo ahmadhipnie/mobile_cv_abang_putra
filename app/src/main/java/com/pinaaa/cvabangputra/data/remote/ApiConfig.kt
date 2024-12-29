@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
 
-    var URL = "https://3e96-112-78-133-196.ngrok-free.app/"
+    var URL = "https://7416-112-78-133-196.ngrok-free.app/"
 
     var api = "api/"
 

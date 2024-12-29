@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".reseller.ui.DetailBarangActivityReseller">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,7 +24,8 @@
             app:iss_placeholder="@drawable/img_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_detail_barang_reseller"/>
 
         <ImageButton
             android:id="@+id/btn_back_detail_barang_reseller"
@@ -46,6 +47,15 @@
             android:background="@android:color/transparent"
             android:layout_margin="20dp"/>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_detail_barang_reseller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.42"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
 
         <LinearLayout
@@ -59,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_slider_detail_barang_reseller">
+            >
 
             <TextView
                 android:id="@+id/tv_nama_kategori_detail_barang_reseller"
@@ -69,7 +79,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/inter_semibold"
                 android:textSize="14sp"/>
-            
+
             <TextView
                 android:id="@+id/tv_nama_barang_detail_barang_reseller"
                 android:layout_width="match_parent"

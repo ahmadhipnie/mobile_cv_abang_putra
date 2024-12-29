@@ -34,6 +34,7 @@ class BarangResellerAdapter : ListAdapter<DataBarangItem, BarangResellerAdapter.
             // Lakukan binding untuk gambar menggunakan Glide, misalnya
             Glide.with(itemView.context)
                 .load(apiConfig.URL + data.gambarUrl)
+                .centerCrop()
                 .into(binding.imgBarang)
 
 //            Log.d(TAG, "Image URL: ${apiConfig.URL + data.gambarUrl}")

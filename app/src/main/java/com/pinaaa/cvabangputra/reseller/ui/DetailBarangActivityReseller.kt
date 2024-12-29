@@ -31,8 +31,8 @@ import java.net.URL
 
 class DetailBarangActivityReseller : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBarangResellerBinding
 
+    private lateinit var binding : ActivityDetailBarangResellerBinding
     private val detailBarangResellerViewModel by viewModels<DetailBarangResellerViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -54,12 +54,7 @@ class DetailBarangActivityReseller : AppCompatActivity() {
         val fullImageUrl = apiConfig.URL + gambarUrl // Gabungkan URL base dengan gambarUrl
 
         binding.tvNamaKategoriDetailBarangReseller.text = intent.getStringExtra("namaKategori")
-        binding.tvNamaBarangDetailBarangReseller.text = "$namaBarang - ${
-            intent.getIntExtra(
-                "stokBarang",
-                0
-            )
-        } ${intent.getStringExtra("satuanBarang")}"
+        binding.tvNamaBarangDetailBarangReseller.text = "$namaBarang - ${intent.getIntExtra("stokBarang", 0)} ${intent.getStringExtra("satuanBarang")}"
         binding.tvHargaBarangDetailBarangReseller.text =
             injection.rupiahFormat(intent.getIntExtra("hargaBarang", 0))
         val deskripsiBarang = intent.getStringExtra("deskripsiBarang") ?: ""
@@ -184,7 +179,7 @@ class DetailBarangActivityReseller : AppCompatActivity() {
         val tvDeskripsi = binding.tvDeskripsiBarangDetailBarangReseller
 
         if (description.length > 30) {
-            val shortDescription = description.substring(0, 30) + "..."
+            val shortDescription = description.substring(0, 30) + "(lihat selengkapnya)"
             tvDeskripsi.text = shortDescription
             tvDeskripsi.setOnClickListener {
                 // Menampilkan deskripsi lengkap jika di klik

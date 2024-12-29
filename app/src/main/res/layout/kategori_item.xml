@@ -13,13 +13,13 @@
         <ImageView
             android:id="@+id/iv_logo_kategori"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:src="@drawable/img_login"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_nama_kategori"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_nama_kategori"
@@ -32,7 +32,8 @@
                 android:textAlignment="center"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/white"
                 android:textSize="12sp"/>
 
 

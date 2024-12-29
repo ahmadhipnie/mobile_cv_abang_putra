@@ -26,5 +26,8 @@ data class DataItem(
 	val createdAt: Any? = null,
 
 	@field:SerializedName("nama_kategori")
-	val namaKategori: String? = null
+	val namaKategori: String? = null,
+
+	@field:SerializedName("jumlah_barang")
+	val jumlahBarang: Int? = null
 )

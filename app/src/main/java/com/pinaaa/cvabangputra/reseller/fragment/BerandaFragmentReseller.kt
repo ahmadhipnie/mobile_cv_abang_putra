@@ -1,6 +1,7 @@
 package com.pinaaa.cvabangputra.reseller.fragment
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.models.SlideModel
 import com.pinaaa.cvabangputra.ViewModelFactory
+import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.databinding.FragmentBerandaResellerBinding
 import com.pinaaa.cvabangputra.reseller.adapter.BarangResellerAdapter
 import com.pinaaa.cvabangputra.reseller.adapter.KategoriResellerAdapter
+import com.pinaaa.cvabangputra.reseller.ui.DetailPromoActivityReseller
 import com.pinaaa.cvabangputra.reseller.viewmodel.BerandaResellerViewModel
 
 class BerandaFragmentReseller : Fragment() {
@@ -26,8 +32,13 @@ class BerandaFragmentReseller : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
+
+
     private val berandaResellerViewModel by viewModels<BerandaResellerViewModel> {
         ViewModelFactory.getInstance(requireActivity())
+
+
     }
 
     override fun onCreateView(
@@ -56,6 +67,37 @@ class BerandaFragmentReseller : Fragment() {
 
         // Mengamati error jika ada
         observeBarangViewModel()
+
+        berandaResellerViewModel.getAllGambarPromo()
+        berandaResellerViewModel.gambarPromo.observe(requireActivity()) { images ->
+            if (!images.isNullOrEmpty()) {
+                val imageList = images.mapNotNull { item ->
+                    item.gambarUrl?.let {
+                        val fullImageUrl = apiConfig.URL + it
+                        SlideModel(fullImageUrl, ScaleTypes.CENTER_CROP)
+                    }
+
+                }
+                binding.imageSliderBerandaReseller.setImageList(imageList)
+
+                binding.imageSliderBerandaReseller.setItemClickListener(object : ItemClickListener {
+                    override fun doubleClick(position: Int) {
+
+                    }
+
+                    override fun onItemSelected(position: Int) {
+                        val intent = Intent(requireActivity(), DetailPromoActivityReseller::class.java)
+                        intent.putExtra("gambar_url", images[position].gambarUrl)
+                        intent.putExtra("id_gambar_promo", images[position].idGambarPromo)
+                        intent.putExtra("promo_id", images[position].promoId)
+                        startActivity(intent)
+                    }
+                })
+            } else {
+                Toast.makeText(requireActivity(), "Tidak ada gambar untuk barang ini.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
 
         return binding.root
     }

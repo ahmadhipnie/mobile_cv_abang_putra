@@ -1,5 +1,6 @@
 package com.pinaaa.cvabangputra.reseller.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.bumptech.glide.annotation.GlideModule
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
 import com.pinaaa.cvabangputra.databinding.KategoriItemBinding
+import com.pinaaa.cvabangputra.reseller.ui.PencarianBarangActivityReseller
 
 class KategoriResellerAdapter: ListAdapter<DataItem, KategoriResellerAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -25,10 +27,17 @@ class KategoriResellerAdapter: ListAdapter<DataItem, KategoriResellerAdapter.Vie
         fun bind(data: DataItem ) {
             Glide.with(itemView.context)
                 .load(apiConfig.URL+data.imageUrl)
+                .centerCrop()
                 .into(ivKategori)
             namaKategori.text = data.namaKategori
 
             itemView.setOnClickListener {
+                Intent(itemView.context, PencarianBarangActivityReseller::class.java).apply {
+                    putExtra("idKategori", data.idKategori)
+                    putExtra("namaKategori", data.namaKategori)
+                    putExtra("jumlahBarang", data.jumlahBarang)
+                    itemView.context.startActivity(this)
+                }
 
             }
         }
