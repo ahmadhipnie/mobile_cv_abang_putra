@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,4 +7,138 @@
     android:layout_height="match_parent"
     tools:context=".reseller.ui.DetailPromoActivityReseller">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider_detail_promo_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:iss_auto_cycle="true"
+            app:iss_corner_radius="10"
+            app:iss_delay="0"
+            app:iss_error_image="@drawable/img_placeholder"
+            app:iss_period="1000"
+            app:iss_placeholder="@drawable/img_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_detail_promo_reseller"/>
+
+        <ImageButton
+            android:id="@+id/btn_back_detail_promo_reseller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_back"
+            android:background="@android:color/transparent"
+            android:layout_margin="20dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_share_detail_promo_reseller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_share"
+            android:background="@android:color/transparent"
+            android:layout_margin="20dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_detail_promo_reseller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.42"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_detail_promo_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:elevation="25dp"
+            android:background="@drawable/bg_cv_login"
+            android:padding="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/tv_nama_kategori_detail_promo_reseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Segera Sebelum Kehabisan"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_semibold"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_nama_promo_detail_promo_reseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Barang"
+                android:textSize="18sp"
+                android:fontFamily="@font/inter_medium"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_periode_promo_detail_promo_reseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tanggal mulai - tanggal selesai"
+                android:textSize="18sp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="14dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi"
+                android:fontFamily="@font/inter_semibold"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#BDBDBD" />
+
+            <TextView
+                android:id="@+id/tv_deskripsi_promo_detail_promo_reseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi Barang"
+                android:fontFamily="@font/inter_light"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_hubungi_admin_detail_promo_reseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button"
+                android:fontFamily="@font/inter_medium"
+                android:text="Hubungi Sekarang"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

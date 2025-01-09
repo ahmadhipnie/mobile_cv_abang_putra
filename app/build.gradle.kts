@@ -94,5 +94,6 @@ dependencies {
     implementation(libs.imageslideshow)
     implementation(libs.androidx.swiperefreshlayout)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 }

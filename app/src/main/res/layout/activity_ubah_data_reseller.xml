@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reseller.ui.UbahDataActivityReseller">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutUbahDataReseller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="15dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBarUbahDataReseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageButton
+                android:id="@+id/btn_back_feedback_reseller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:background="@android:color/transparent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_gravity="start"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubah data profil"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_semibold"
+                android:textSize="18sp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_gravity="center"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressIndicatorResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:indeterminate="true"
+            android:visibility="gone"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutUbahDataReseller"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_foto_profil_ubah_data_reseller"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:civ_border_width="2dp"
+            android:src="@drawable/img_placeholder"
+            app:civ_border_color="@color/colorOnPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="klik untuk ubah foto profil"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:fontFamily="@font/inter_light"/>
+
+        <TextView
+            android:id="@+id/tv_nama_ubah_data_reseller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Reseller"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:id="@+id/et_email_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/et_nama_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nama"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/et_alamat_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="alamat"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/et_nomor_telepon_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nomor telepon"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/et_password_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            app:endIconMode="password_toggle"/>
+
+        <EditText
+            android:id="@+id/et_konfirmasi_password_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="konfirmasi password"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            app:endIconMode="password_toggle"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ubah_data_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubah data"
+            android:textAllCaps="false"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_button"
+            android:textColor="@color/white"/>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,4 +26,6 @@
     <string name="profil">profil</string>
     <string name="stok">stok</string>
     <string name="pesanan">pesanan</string>
+    <string name="laporan">laporan</string>
+    <string name="feedback">feedback</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.pinaaa.cvabangputra.admin.ui.MainActivityAdmin
 import com.pinaaa.cvabangputra.components.CustomDialogLoading
 import com.pinaaa.cvabangputra.databinding.ActivityLoginBinding
 import com.pinaaa.cvabangputra.reseller.ui.MainActivityReseller
@@ -71,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                         editor.putString("email", email)
                         editor.putString("password", password)
                         editor.putString("role", response.role)
+                        editor.putBoolean("isLoggedInAdmin", true)
                         editor.apply()
 
                         dialogLoading.setLoadingVisible(false)
@@ -81,10 +83,10 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
 
 
-//                        Intent(this@LoginActivity, MainActivity::class.java).apply {
-//                            startActivity(this)
-//                            finish()
-//                        }
+                        Intent(this@LoginActivity, MainActivityAdmin::class.java).apply {
+                            startActivity(this)
+                            finish()
+                        }
 
                     } else if (response.role == "reseller") {
 

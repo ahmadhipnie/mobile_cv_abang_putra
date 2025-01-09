@@ -18,12 +18,15 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.pinaaa.cvabangputra.ViewModelFactory
+import com.pinaaa.cvabangputra.data.local.DatabaseRepository
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.databinding.FragmentBerandaResellerBinding
 import com.pinaaa.cvabangputra.reseller.adapter.BarangResellerAdapter
 import com.pinaaa.cvabangputra.reseller.adapter.KategoriResellerAdapter
 import com.pinaaa.cvabangputra.reseller.ui.DetailPromoActivityReseller
 import com.pinaaa.cvabangputra.reseller.viewmodel.BerandaResellerViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 
 class BerandaFragmentReseller : Fragment() {
 
@@ -35,11 +38,12 @@ class BerandaFragmentReseller : Fragment() {
     private val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
 
 
+    private val coroutineScope: CoroutineScope = MainScope()
+
     private val berandaResellerViewModel by viewModels<BerandaResellerViewModel> {
         ViewModelFactory.getInstance(requireActivity())
-
-
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,11 +94,19 @@ class BerandaFragmentReseller : Fragment() {
                         intent.putExtra("gambar_url", images[position].gambarUrl)
                         intent.putExtra("id_gambar_promo", images[position].idGambarPromo)
                         intent.putExtra("promo_id", images[position].promoId)
+                        intent.putExtra("nama_promo", images[position].namaPromo)
+                        intent.putExtra("deskripsi_promo", images[position].deskripsiPromo)
+                        intent.putExtra("tanggal_periode_awal", images[position].tanggalPeriodeAwal)
+                        intent.putExtra("tanggal_periode_akhir", images[position].tanggalPeriodeAkhir)
                         startActivity(intent)
                     }
                 })
             } else {
-                Toast.makeText(requireActivity(), "Tidak ada gambar untuk barang ini.", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireActivity(),
+                    "Tidak ada gambar untuk barang ini.",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
@@ -112,7 +124,8 @@ class BerandaFragmentReseller : Fragment() {
     }
 
     private fun setupRecyclerViewBarang() {
-        val barangAdapter = BarangResellerAdapter()
+        val databaseRepository = DatabaseRepository.getInstance(requireActivity().application)
+        val barangAdapter = BarangResellerAdapter(coroutineScope, databaseRepository)
         binding.rvPalingBanyakDibeliBerandaReseller.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = barangAdapter
@@ -122,13 +135,17 @@ class BerandaFragmentReseller : Fragment() {
 
     private fun observeViewModel() {
         berandaResellerViewModel.kategori.observe(viewLifecycleOwner) { kategoriList ->
-            (binding.rvKategoriBerandaReseller.adapter as KategoriResellerAdapter).submitList(kategoriList)
+            (binding.rvKategoriBerandaReseller.adapter as KategoriResellerAdapter).submitList(
+                kategoriList
+            )
             checkDataLoaded()  // Cek apakah data sudah lengkap untuk ditampilkan
         }
 
         berandaResellerViewModel.barang.observe(viewLifecycleOwner) { barangList ->
             if (barangList != null && barangList.isNotEmpty()) {
-                (binding.rvPalingBanyakDibeliBerandaReseller.adapter as BarangResellerAdapter).submitList(barangList)
+                (binding.rvPalingBanyakDibeliBerandaReseller.adapter as BarangResellerAdapter).submitList(
+                    barangList
+                )
             } else {
                 Toast.makeText(context, "Data barang kosong", Toast.LENGTH_SHORT).show()
             }
@@ -138,7 +155,9 @@ class BerandaFragmentReseller : Fragment() {
     private fun observeBarangViewModel() {
         berandaResellerViewModel.barang.observe(viewLifecycleOwner) { barangList ->
             if (barangList != null && barangList.isNotEmpty()) {
-                (binding.rvPalingBanyakDibeliBerandaReseller.adapter as BarangResellerAdapter).submitList(barangList)
+                (binding.rvPalingBanyakDibeliBerandaReseller.adapter as BarangResellerAdapter).submitList(
+                    barangList
+                )
             } else {
                 Toast.makeText(context, "Data barang kosong", Toast.LENGTH_SHORT).show()
             }

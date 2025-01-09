@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class BarangResponse(
 
 	@field:SerializedName("data_barang")
-	val dataBarang: List<DataBarangItem?>? = null,
+	val dataBarang: List<DataBarangItem>,
 
 	@field:SerializedName("status")
 	val status: String? = null

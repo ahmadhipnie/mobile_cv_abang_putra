@@ -5,13 +5,13 @@
         android:icon="@drawable/ic_home_selector"
         android:title="@string/beranda" />
     <item
-        android:id="@+id/menu_stok_admin"
+        android:id="@+id/menu_laporan_admin"
         android:icon="@drawable/ic_pesanan_selector"
-        android:title="@string/pesanan" />
+        android:title="@string/laporan" />
     <item
-        android:id="@+id/menu_keranjang_pelanggan"
+        android:id="@+id/menu_feedback_admin"
         android:icon="@drawable/ic_keranjang_selector"
-        android:title="@string/stok" />
+        android:title="@string/feedback" />
 
     <item
         android:id="@+id/menu_profil_admin"

@@ -16,11 +16,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pinaaa.cvabangputra.R
 import com.pinaaa.cvabangputra.ViewModelFactory
+import com.pinaaa.cvabangputra.data.local.DatabaseRepository
 import com.pinaaa.cvabangputra.databinding.ActivityPencarianBarangResellerBinding
 import com.pinaaa.cvabangputra.reseller.adapter.BarangResellerAdapter
 import com.pinaaa.cvabangputra.reseller.adapter.KategoriResellerAdapter
 import com.pinaaa.cvabangputra.reseller.viewmodel.BerandaResellerViewModel
 import com.pinaaa.cvabangputra.reseller.viewmodel.PencarianBarangResellerViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 
 class PencarianBarangActivityReseller : AppCompatActivity() {
 
@@ -32,6 +35,8 @@ class PencarianBarangActivityReseller : AppCompatActivity() {
     private var kategoriId: Int? = null
     private var namaKategori: String? = null
     private var jumlahBarang: Int? = null
+
+    private val coroutineScope: CoroutineScope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +76,8 @@ class PencarianBarangActivityReseller : AppCompatActivity() {
 
     private fun setupRecyclerViewBarang() {
         // Setup RecyclerView dengan Adapter BarangResellerAdapter
-        val barangAdapter = BarangResellerAdapter()
+        val databaseRepository = DatabaseRepository.getInstance(application)
+        val barangAdapter = BarangResellerAdapter(coroutineScope,databaseRepository)
         binding.rvPencarianBarangReseller.apply {
             layoutManager = GridLayoutManager(context, 2)  // Menggunakan 2 kolom
             adapter = barangAdapter

@@ -16,6 +16,9 @@ data class DataGambarPromoItem(
 	@field:SerializedName("nama_promo")
 	val namaPromo: String? = null,
 
+	@field:SerializedName("tanggal_periode_awal")
+	val tanggalPeriodeAwal: String? = null,
+
 	@field:SerializedName("updated_at")
 	val updatedAt: Any? = null,
 
@@ -28,6 +31,12 @@ data class DataGambarPromoItem(
 	@field:SerializedName("id_gambar_promo")
 	val idGambarPromo: Int? = null,
 
+	@field:SerializedName("tanggal_periode_akhir")
+	val tanggalPeriodeAkhir: String? = null,
+
 	@field:SerializedName("promo_id")
-	val promoId: Int? = null
+	val promoId: Int? = null,
+
+	@field:SerializedName("deskripsi_promo")
+	val deskripsiPromo: String? = null
 )

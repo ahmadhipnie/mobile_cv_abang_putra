@@ -5,4 +5,9 @@
 
     <color name="colorOnPrimary">#0D7C66</color>
     <color name="colorPrimary">#50B498</color>
+
+    <color name="colorBtnFeedback">#129EB7</color>
+    <color name="red">#FF0000</color>
+    <color name="yellow_star">#FFB323</color>
+
 </resources>
