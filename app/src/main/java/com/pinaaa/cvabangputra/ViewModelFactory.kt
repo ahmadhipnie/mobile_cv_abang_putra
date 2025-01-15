@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
 import com.pinaaa.cvabangputra.admin.viewmodel.FeedbackAdminViewModel
 import com.pinaaa.cvabangputra.admin.viewmodel.PromoAdminViewModel
+import com.pinaaa.cvabangputra.admin.viewmodel.StokBarangViewModel
+import com.pinaaa.cvabangputra.admin.viewmodel.UbahPasswordAdminViewModel
 import com.pinaaa.cvabangputra.di.injection
 import com.pinaaa.cvabangputra.reseller.viewmodel.BerandaResellerViewModel
 import com.pinaaa.cvabangputra.reseller.viewmodel.DetailBarangResellerViewModel
@@ -27,6 +29,15 @@ class ViewModelFactory private constructor(private val repository: Repository): 
             }
             modelClass.isAssignableFrom(PromoAdminViewModel::class.java) -> {
                 PromoAdminViewModel() as T
+            }
+            modelClass.isAssignableFrom(StokBarangViewModel::class.java) -> {
+                StokBarangViewModel() as T
+            }
+            modelClass.isAssignableFrom(UbahPasswordAdminViewModel::class.java) -> {
+                UbahPasswordAdminViewModel() as T
+            }
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                RegisterViewModel() as T
             }
             modelClass.isAssignableFrom(FeedbackAdminViewModel::class.java) -> {
                 FeedbackAdminViewModel(repository) as T

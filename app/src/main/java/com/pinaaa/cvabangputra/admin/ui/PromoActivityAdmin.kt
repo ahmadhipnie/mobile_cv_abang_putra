@@ -1,5 +1,6 @@
 package com.pinaaa.cvabangputra.admin.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -48,6 +49,12 @@ class PromoActivityAdmin : AppCompatActivity() {
         binding.btnBackPromoAdmin.setOnClickListener {
             finish()
         }
+
+        binding.fabAddPromoAdmin.setOnClickListener {
+            startActivity(Intent(this, TambahPromoActivityAdmin::class.java))
+        }
+
+
 
 
     }

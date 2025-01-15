@@ -1,5 +1,6 @@
 package com.pinaaa.cvabangputra.admin.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -34,6 +35,12 @@ class BarangActivityAdmin : AppCompatActivity() {
         binding.btnBackBarangAdmin.setOnClickListener {
             finish()
         }
+
+        binding.fabAddBarangAdmin.setOnClickListener {
+            startActivity(Intent(this, AddBarangActivityAdmin::class.java))
+        }
+
+
     }
 
     private fun setupRecyclerView() {

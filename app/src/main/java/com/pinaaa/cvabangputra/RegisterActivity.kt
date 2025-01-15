@@ -2,16 +2,30 @@ package com.pinaaa.cvabangputra
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.pinaaa.cvabangputra.components.CustomDialogLoading
 import com.pinaaa.cvabangputra.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+
+    private lateinit var dialogLoading: CustomDialogLoading
+
+
+    private val registerViewModel by viewModels<RegisterViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -21,6 +35,45 @@ class RegisterActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        dialogLoading = CustomDialogLoading(this@RegisterActivity)
+
+        binding.btnRegister.setOnClickListener {
+            if (binding.etEmailRegister.text.toString().isEmpty() || binding.etPasswordRegister.text.toString().isEmpty() || binding.etNameRegister.text.toString().isEmpty() || binding.etNomorTeleponRegister.text.toString().isEmpty() || binding.etTangalLahirRegister.text.toString().isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                AlertDialog.Builder(this)
+                    .setTitle("peringatan!")
+                    .setMessage("Apakah data yang anda masukkan sudah benar?")
+                    .setPositiveButton("Ya") { _, _ ->
+                        dialogLoading.setLoadingVisible(true)
+                        registerViewModel.addUsers(
+                            binding.etEmailRegister.text.toString(),
+                            binding.etPasswordRegister.text.toString(),
+                            binding.etNameRegister.text.toString(),
+                            binding.etNomorTeleponRegister.text.toString(),
+                            binding.etTangalLahirRegister.text.toString()
+                        )
+                    }
+                    .setNegativeButton("Tidak") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        }
+
+        registerViewModel.addUsersStatus.observe(this) { isRegistered ->
+            if (isRegistered) {
+                Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()
+                dialogLoading.setLoadingVisible(false)
+                Intent(this, LoginActivity::class.java).also {
+                    startActivity(it)
+                    finish()
+                }
+            } else {
+                dialogLoading.setLoadingVisible(false)
+                Toast.makeText(this, "Failed to register", Toast.LENGTH_SHORT).show()
+            }
         }
 
         playAnimationRegister()

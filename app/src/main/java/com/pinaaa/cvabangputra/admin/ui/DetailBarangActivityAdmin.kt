@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -12,6 +13,8 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.pinaaa.cvabangputra.R
 import com.pinaaa.cvabangputra.ViewModelFactory
+import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
+import com.pinaaa.cvabangputra.admin.viewmodel.PromoAdminViewModel
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.databinding.ActivityDetailBarangAdminBinding
 import com.pinaaa.cvabangputra.di.injection
@@ -21,6 +24,10 @@ class DetailBarangActivityAdmin : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBarangAdminBinding
 
     private val detailBarangResellerViewModel by viewModels<DetailBarangResellerViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
+    private val barangAdminViewModel by viewModels<BarangAdminViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
@@ -56,6 +63,28 @@ class DetailBarangActivityAdmin : AppCompatActivity() {
         binding.tvDeskripsiBarangDetailBarangAdmin.text = deskripsiBarang
         binding.tvHargaBarangDetailBarangAdmin.text = injection.rupiahFormat(hargaBarang)
         binding.tvNamaKategoriDetailBarangAdmin.text = namaKategori
+
+        binding.btnHapusDetailBarangAdmin.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Hapus Barang")
+                .setMessage("Apakah Anda yakin ingin menghapus barang ini?")
+                .setPositiveButton("Ya") { _, _ ->
+                    barangAdminViewModel.deleteBarang(idBarang)
+                }
+                .setNegativeButton("Tidak") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        barangAdminViewModel.deleteBarangStatus.observe(this) { isDeleted ->
+            if (isDeleted) {
+                Toast.makeText(this, "Barang deleted successfully", Toast.LENGTH_SHORT).show()
+                finish() // Kembali ke halaman sebelumnya setelah berhasil dihapus
+            } else {
+                Toast.makeText(this, "Failed to delete barang", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         // Ambil data gambar dari ViewModel
         detailBarangResellerViewModel.getImagesBarangByIdBarang(intent.getIntExtra("idBarang", 0))

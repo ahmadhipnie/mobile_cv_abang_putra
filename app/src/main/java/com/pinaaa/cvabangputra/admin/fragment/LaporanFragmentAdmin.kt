@@ -5,56 +5,66 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.pinaaa.cvabangputra.R
+import com.pinaaa.cvabangputra.ViewModelFactory
+import com.pinaaa.cvabangputra.admin.adapter.BarangAdminAdapter
+import com.pinaaa.cvabangputra.admin.adapter.StokBarangAdminAdapter
+import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
+import com.pinaaa.cvabangputra.admin.viewmodel.FeedbackAdminViewModel
+import com.pinaaa.cvabangputra.admin.viewmodel.StokBarangViewModel
+import com.pinaaa.cvabangputra.databinding.FragmentLaporanAdminBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LaporanFragmentAdmin.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LaporanFragmentAdmin : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding : FragmentLaporanAdminBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val stokBarangViewModel by viewModels<StokBarangViewModel> {
+        ViewModelFactory.getInstance(requireActivity())
     }
+
+    private val barangAdminViewModel: BarangAdminViewModel by viewModels {
+        ViewModelFactory.getInstance(requireActivity())
+    }
+
+    private lateinit var adapter: StokBarangAdminAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_laporan_admin, container, false)
+        _binding = FragmentLaporanAdminBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LaporanFragmentAdmin.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LaporanFragmentAdmin().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+        observeViewModel()
+        barangAdminViewModel.fetchBarangs()
+        adapter = StokBarangAdminAdapter(stokBarangViewModel)
+
+    }
+
+    private fun setupRecyclerView() {
+        adapter = StokBarangAdminAdapter(stokBarangViewModel)
+        binding.rvStokBarangAdmin.layoutManager = GridLayoutManager(requireActivity(), 1)
+        binding.rvStokBarangAdmin.adapter = adapter
+    }
+
+    private fun observeViewModel() {
+        barangAdminViewModel.barangList.observe(requireActivity()) { barangList ->
+            adapter.submitList(barangList)
+        }
+
+        barangAdminViewModel.isLoading.observe(requireActivity()) { isLoading ->
+            binding.progressBarLaporanAdmin.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
     }
 }

@@ -37,6 +37,8 @@ interface ApiService {
         @Field("id_barang") id_barang: Int
     ): GambarBarangResponse
 
+
+
     @FormUrlEncoded
     @POST("getImagesPromoByIdPromo")
     suspend fun getImagesPromoByIdPromo(
@@ -49,6 +51,9 @@ interface ApiService {
 
     @GET("getAllKategori")
     suspend fun getKategori(): KategoriResponse
+
+    @GET("getAllKategori")
+    fun getKategoriAdmin(): Call<KategoriResponse>
 
 
     @GET("getAllBarang")
@@ -79,6 +84,32 @@ interface ApiService {
     ): FeedbackResponse
 
     @Multipart
+    @POST("addKategori")
+    suspend fun addKategori(
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part photo: MultipartBody.Part? = null
+    ): FeedbackResponse
+
+    @Multipart
+    @POST("addBarang")
+    fun addBarang(
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part gambarUrl1: MultipartBody.Part? = null,
+        @Part gambarUrl2: MultipartBody.Part? = null,
+        @Part gambarUrl3: MultipartBody.Part? = null
+    ): Call<FeedbackResponse>
+
+    @Multipart
+    @POST("addPromo")
+    fun addPromo(
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part gambarUrl1: MultipartBody.Part? = null,
+        @Part gambarUrl2: MultipartBody.Part? = null,
+        @Part gambarUrl3: MultipartBody.Part? = null
+    ): Call<FeedbackResponse>
+
+
+    @Multipart
     @POST("updateUserReseller")
     suspend fun updateUserReseller(
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
@@ -98,6 +129,43 @@ interface ApiService {
     fun getBarangsBySearchAdmin(
         @Field("nama_barang") nama_barang: String
     ): Call<BarangResponse>
+
+
+    @FormUrlEncoded
+    @POST("deletePromo")
+    fun deletePromo(
+        @Field("id_promo") id_promo: Int
+    ): Call<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("deleteBarang")
+    fun deleteBarang(
+        @Field("id_barang") id_barang: Int
+    ): Call<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("updatePassword")
+    fun updatePassword(
+        @Field("id_user") id_user: Int,
+        @Field("password") password: String
+    ): Call<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("addUserAndReseller")
+    fun addUserAndReseller(
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("nama") nama: String,
+        @Field("nomor_telepon") nomor_telepon: String,
+        @Field("tanggal_lahir") tanggal_lahir: String,
+    ): Call<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("updateStokBarang")
+    fun updateStokBarang(
+        @Field("id_barang") id_barang: Int,
+        @Field("stok_barang") stok_barang: Int
+    ): Call<FeedbackResponse>
 
     @FormUrlEncoded
     @POST("getPromosBySearchAdmin")

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -106,10 +107,28 @@ class DetailBarangActivityReseller : AppCompatActivity() {
         binding.btnPesanSekarangDetailBarangReseller.setOnClickListener {
             val namaBarang = intent.getStringExtra("namaBarang") ?: ""
             val gambarUrl = intent.getStringExtra("gambarUrl") ?: ""
-            val fullImageUrl = apiConfig.URL + gambarUrl // Gabungkan URL base dengan gambarUrl
+//            val fullImageUrl = apiConfig.URL + gambarUrl // Gabungkan URL base dengan gambarUrl
+//
+//            // Kirim pesan melalui WhatsApp
+//            sendMessageToWhatsapp(fullImageUrl, namaBarang)
 
-            // Kirim pesan melalui WhatsApp
-            sendMessageToWhatsapp(fullImageUrl, namaBarang)
+
+
+            //cara lain untuk mengirimkan ke wa tanpa gambar
+            // Nomor WhatsApp yang ingin dihubungi
+            val nomorWhatsApp = "+6282268672361"
+
+            val pesan = """
+            apakah barang dengan nama $namaBarang
+            dengan gambar dari link berikut masih tersedia?
+            ${apiConfig.URL}$gambarUrl
+            """.trimIndent()
+
+            // Membuat format URI untuk intent WhatsApp
+            val url =
+                "https://api.whatsapp.com/send?phone=" + nomorWhatsApp + "&text=" + Uri.encode(pesan)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
 
     }
@@ -255,5 +274,24 @@ class DetailBarangActivityReseller : AppCompatActivity() {
             Log.e(TAG, "Error downloading image: ${e.message}", e)
             null
         }
+    }
+
+    private fun kirimPesanWhatsApp() {
+//        // Nomor WhatsApp yang ingin dihubungi
+//        val nomorWhatsApp = "+6281333100497"
+//
+//        val pesan = """
+//            Pertanyaan dari: $namaPengirim
+//            NISN : $nisnString
+//            Pertanyaan :
+//
+//            $pertanyaan
+//            """.trimIndent()
+//
+//        // Membuat format URI untuk intent WhatsApp
+//        val url =
+//            "https://api.whatsapp.com/send?phone=" + nomorWhatsApp + "&text=" + Uri.encode(pesan)
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//        startActivity(intent)
     }
 }

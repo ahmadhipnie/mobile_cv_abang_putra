@@ -71,11 +71,12 @@ class BerandaFragmentAdmin : Fragment() {
                 startActivity(this)
             }
         }
+
         binding.fabTambahBarangBerandaAdmin.setOnClickListener {
-            Intent(requireActivity(), TambahKategoriActivityAdmin::class.java).apply {
+            Intent(requireActivity(), TambahKategoriActivityAdmin::class.java).apply{
                 startActivity(this)
-            }
-        }
+            }}
+
 
 
 

@@ -70,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
 
                         val editor = sharedPreferences.edit()
                         editor.putString("email", email)
+                        editor.putInt("id_user", response.data?.idUser!!)
                         editor.putString("password", password)
                         editor.putString("role", response.role)
                         editor.putBoolean("isLoggedInAdmin", true)

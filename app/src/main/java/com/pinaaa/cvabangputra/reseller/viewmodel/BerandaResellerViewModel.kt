@@ -1,5 +1,6 @@
 package com.pinaaa.cvabangputra.reseller.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,11 +44,14 @@ class BerandaResellerViewModel(private val repository: Repository) : ViewModel()
             try {
                 val result = repository.getKategori()
                 _kategori.postValue(result)
+                Log.d("KategoriViewModel", "Data kategori berhasil diambil: $result")
             } catch (e: Exception) {
                 _error.postValue(e.message ?: "An unexpected error occurred")
+                Log.e("KategoriViewModel", "Error mengambil data kategori: ${e.message}")
             }
         }
     }
+
 
     fun getBarang() {
         viewModelScope.launch {

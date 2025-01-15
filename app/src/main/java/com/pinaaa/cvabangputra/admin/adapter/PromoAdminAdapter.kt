@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
+import com.pinaaa.cvabangputra.admin.ui.DetailPromoActivityAdmin
 import com.pinaaa.cvabangputra.admin.ui.PromoActivityAdmin
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.data.remote.response.admin.DataPromoItem
@@ -17,8 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class PromoAdminAdapter() :
-    ListAdapter<DataPromoItem, PromoAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
+class PromoAdminAdapter() : ListAdapter<DataPromoItem, PromoAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
 
@@ -39,7 +39,7 @@ class PromoAdminAdapter() :
                 .into(binding.imgItemGambarPromo)
 
             itemView.setOnClickListener() {
-                val intent = Intent(itemView.context, PromoActivityAdmin::class.java)
+                val intent = Intent(itemView.context, DetailPromoActivityAdmin::class.java)
                 intent.putExtra("idPromo", data.idPromo)
                 intent.putExtra("namaPromo", data.namaPromo)
                 intent.putExtra("tanggalPeriodeAwal", data.tanggalPeriodeAwal)

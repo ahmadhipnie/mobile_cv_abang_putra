@@ -1,60 +1,68 @@
 package com.pinaaa.cvabangputra.admin.fragment
 
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.pinaaa.cvabangputra.LoginActivity
 import com.pinaaa.cvabangputra.R
+import com.pinaaa.cvabangputra.admin.ui.UbahPasswordActivityAdmin
+import com.pinaaa.cvabangputra.databinding.FragmentProfilAdminBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfilFragmentAdmin.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfilFragmentAdmin : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentProfilAdminBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil_admin, container, false)
+        _binding = FragmentProfilAdminBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment profilFragmentAdmin.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfilFragmentAdmin().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferences = requireActivity().getSharedPreferences("USER", MODE_PRIVATE)
+
+        val email = sharedPreferences.getString("email", "")
+        val idUser = sharedPreferences.getInt("id_user", 0)
+        val password = sharedPreferences.getString("password", "")
+
+        binding.tvEmailProfilAdminValue.text = email
+        binding.tvPasswordProfilAdminValue.text = password
+
+
+        binding.btnUbahPasswordProfilAdmin.setOnClickListener{
+            val intent = Intent(requireActivity(), UbahPasswordActivityAdmin::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnLogoutProfilAdmin.setOnClickListener {
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+
+            Intent(requireActivity(), LoginActivity::class.java).also {
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(it)
+                requireActivity().finish()
             }
+        }
+
+
+
+
+
     }
 }
