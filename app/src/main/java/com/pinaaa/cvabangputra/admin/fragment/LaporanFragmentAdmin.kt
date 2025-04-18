@@ -5,20 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.pinaaa.cvabangputra.R
 import com.pinaaa.cvabangputra.ViewModelFactory
-import com.pinaaa.cvabangputra.admin.adapter.BarangAdminAdapter
 import com.pinaaa.cvabangputra.admin.adapter.StokBarangAdminAdapter
 import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
-import com.pinaaa.cvabangputra.admin.viewmodel.FeedbackAdminViewModel
 import com.pinaaa.cvabangputra.admin.viewmodel.StokBarangViewModel
 import com.pinaaa.cvabangputra.databinding.FragmentLaporanAdminBinding
 
 class LaporanFragmentAdmin : Fragment() {
-    private var _binding : FragmentLaporanAdminBinding? = null
+
+    private var _binding: FragmentLaporanAdminBinding? = null
     private val binding get() = _binding!!
 
     private val stokBarangViewModel by viewModels<StokBarangViewModel> {
@@ -31,13 +28,10 @@ class LaporanFragmentAdmin : Fragment() {
 
     private lateinit var adapter: StokBarangAdminAdapter
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentLaporanAdminBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,26 +39,36 @@ class LaporanFragmentAdmin : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
-        observeViewModel()
-        barangAdminViewModel.fetchBarangs()
+        // Inisialisasi adapter terlebih dahulu
         adapter = StokBarangAdminAdapter(stokBarangViewModel)
 
+        // Setup recyclerView & observer
+        setupRecyclerView()
+        observeViewModel()
+
+        // Ambil data
+        barangAdminViewModel.fetchBarangs()
     }
 
     private fun setupRecyclerView() {
-        adapter = StokBarangAdminAdapter(stokBarangViewModel)
         binding.rvStokBarangAdmin.layoutManager = GridLayoutManager(requireActivity(), 1)
         binding.rvStokBarangAdmin.adapter = adapter
     }
 
     private fun observeViewModel() {
-        barangAdminViewModel.barangList.observe(requireActivity()) { barangList ->
+        // Gunakan viewLifecycleOwner yang aman
+        barangAdminViewModel.barangList.observe(viewLifecycleOwner) { barangList ->
             adapter.submitList(barangList)
         }
 
-        barangAdminViewModel.isLoading.observe(requireActivity()) { isLoading ->
-            binding.progressBarLaporanAdmin.visibility = if (isLoading) View.VISIBLE else View.GONE
+        barangAdminViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBarLaporanAdmin.visibility =
+                if (isLoading) View.VISIBLE else View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

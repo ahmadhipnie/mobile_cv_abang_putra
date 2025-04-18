@@ -1,11 +1,8 @@
 package com.pinaaa.cvabangputra.admin.adapter
 
-import android.content.ContentValues.TAG
-import android.content.Intent
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +11,10 @@ import com.pinaaa.cvabangputra.admin.viewmodel.StokBarangViewModel
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataBarangItem
 import com.pinaaa.cvabangputra.databinding.StokItemBinding
-import kotlinx.coroutines.launch
 
 class StokBarangAdminAdapter(private val stokBarangViewModel: StokBarangViewModel)  : ListAdapter<DataBarangItem, StokBarangAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
+    val apiConfig = ApiConfig()
 
 
     @GlideModule
@@ -40,14 +36,7 @@ class StokBarangAdminAdapter(private val stokBarangViewModel: StokBarangViewMode
                     stokBarangViewModel.updateStokBarang(data.idBarang!!, stokBarang)
                 }
             }
-//            stokBarangViewModel.viewModelScope.launch {
-//                binding.etItemStokBarangAdmin.setOnFocusChangeListener { view, hasFocus ->
-//                    if (!hasFocus) {
-//                        val stokBarang = binding.etItemStokBarangAdmin.text.toString().toInt()
-//                        stokBarangViewModel.updateStokBarang(data.idBarang!!, stokBarang)
-//                    }
-//                }
-//            }
+//
 
         }
     }

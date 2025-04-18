@@ -1,124 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context=".reseller.fragment.BerandaFragmentReseller">
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
+        <!-- ProgressBar -->
         <ProgressBar
             android:id="@+id/progress_bar_beranda_reseller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_gravity="center"/>
 
+        <!-- Welcome Text -->
         <TextView
             android:id="@+id/tv_selamat_datang_beranda_reseller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Selamat Datang"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:textSize="14sp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="30dp"
             android:fontFamily="@font/inter_light"/>
-        
+
         <TextView
             android:id="@+id/tv_nama_user_beranda_reseller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_selamat_datang_beranda_reseller"
             android:text="Nama User"
-            android:layout_marginHorizontal="10dp"
             android:textSize="18sp"
-            android:fontFamily="@font/inter_semibold"/>
+            android:fontFamily="@font/inter_semibold"
+            android:layout_marginTop="4dp"/>
 
+        <!-- Image Slider -->
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider_beranda_reseller"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginHorizontal="10dp"
-            app:iss_auto_cycle="true"
+            app:iss_auto_cycle="false"
             app:iss_corner_radius="10"
-            app:iss_delay="0"
             app:iss_error_image="@drawable/img_login"
-            app:iss_period="1000"
             app:iss_placeholder="@drawable/img_login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nama_user_beranda_reseller"/>
+            android:layout_marginTop="12dp"/>
 
+        <!-- Kategori -->
         <TextView
             android:id="@+id/tv_kategori_beranda_reseller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_slider_beranda_reseller"
             android:text="Kategori"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
             android:textSize="18sp"
-            android:fontFamily="@font/inter_semibold"/>
+            android:fontFamily="@font/inter_semibold"
+            android:layout_marginTop="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_kategori_beranda_reseller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_kategori_beranda_reseller"
-            tools:listitem="@layout/kategori_item"
             android:orientation="horizontal"
-            tools:itemCount="1"
-            />
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/kategori_item"
+            tools:itemCount="1"/>
 
+        <!-- Paling Banyak Dibeli -->
         <TextView
             android:id="@+id/tv_paling_banyak_dibeli_beranda_reseller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_kategori_beranda_reseller"
-            android:text="Paling Banyak DIbeli"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
+            android:text="Paling Banyak Dibeli"
             android:textSize="18sp"
-            android:fontFamily="@font/inter_semibold"/>
+            android:fontFamily="@font/inter_semibold"
+            android:layout_marginTop="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_paling_banyak_dibeli_beranda_reseller"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_paling_banyak_dibeli_beranda_reseller"
+            android:nestedScrollingEnabled="false"
             tools:listitem="@layout/barang_item"
             tools:itemCount="1"/>
-
-
-
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-</ScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

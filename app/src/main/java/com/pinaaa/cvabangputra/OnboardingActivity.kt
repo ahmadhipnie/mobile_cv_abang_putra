@@ -31,7 +31,8 @@ class OnboardingActivity : AppCompatActivity() {
             editor.apply()  // Save the data
 
             // Move to LoginActivity
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+
             finish()  // Close the OnboardingActivity
         }
 

@@ -62,6 +62,13 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnLoginRegister.setOnClickListener() {
+            Intent(this, LoginActivity::class.java).also {
+                startActivity(it)
+                finish()
+            }
+        }
+
         registerViewModel.addUsersStatus.observe(this) { isRegistered ->
             if (isRegistered) {
                 Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()

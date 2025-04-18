@@ -1,36 +1,29 @@
 package com.pinaaa.cvabangputra.admin.fragment
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.pinaaa.cvabangputra.R
 import com.pinaaa.cvabangputra.ViewModelFactory
 import com.pinaaa.cvabangputra.admin.adapter.KategoriAdminAdapter
 import com.pinaaa.cvabangputra.admin.ui.BarangActivityAdmin
 import com.pinaaa.cvabangputra.admin.ui.PromoActivityAdmin
 import com.pinaaa.cvabangputra.admin.ui.TambahKategoriActivityAdmin
+import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.databinding.FragmentBerandaAdminBinding
-import com.pinaaa.cvabangputra.reseller.adapter.BarangResellerAdapter
-import com.pinaaa.cvabangputra.reseller.adapter.KategoriResellerAdapter
-import com.pinaaa.cvabangputra.reseller.viewmodel.BerandaResellerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
 class BerandaFragmentAdmin : Fragment() {
 
-    private var _binding : FragmentBerandaAdminBinding? = null
+    private var _binding: FragmentBerandaAdminBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -39,7 +32,7 @@ class BerandaFragmentAdmin : Fragment() {
 
     private val coroutineScope: CoroutineScope = MainScope()
 
-    private val berandaResellerViewModel by viewModels<BerandaResellerViewModel> {
+    private val barangAdminViewModel by viewModels<BarangAdminViewModel> {
         ViewModelFactory.getInstance(requireActivity())
     }
 
@@ -58,7 +51,7 @@ class BerandaFragmentAdmin : Fragment() {
 
         sharedPreferences = requireActivity().getSharedPreferences("USER", MODE_PRIVATE)
         val email = sharedPreferences.getString("email", "")
-        binding.tvTitleMenu1BerandaAdmin.text = email
+        binding.tvDescMenu1BerandaAdmin.text = email
 
         binding.cvBarangBerandaAdmin.setOnClickListener {
             Intent(requireActivity(), BarangActivityAdmin::class.java).apply {
@@ -73,36 +66,29 @@ class BerandaFragmentAdmin : Fragment() {
         }
 
         binding.fabTambahBarangBerandaAdmin.setOnClickListener {
-            Intent(requireActivity(), TambahKategoriActivityAdmin::class.java).apply{
+            Intent(requireActivity(), TambahKategoriActivityAdmin::class.java).apply {
                 startActivity(this)
-            }}
-
-
-
-
-        setupRecyclerView()
-        berandaResellerViewModel.getKategori()
-        observeViewModel()
-
-    }
-
-    private fun setupRecyclerView() {
-        val kategoriAdminAdapter = KategoriAdminAdapter()
-        binding.rvKategoriBerandaAdmin.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = kategoriAdminAdapter
-            setHasFixedSize(true)
+            }
         }
-    }
 
-    private fun observeViewModel() {
-        berandaResellerViewModel.kategori.observe(viewLifecycleOwner) { kategoriList ->
-            (binding.rvKategoriBerandaAdmin.adapter as KategoriAdminAdapter).submitList(
-                kategoriList
-            )
+
+
+        barangAdminViewModel.fetchKategori()
+        // Observasi kategori dari ViewModel
+        barangAdminViewModel.kategoriList.observe(requireActivity()) { kategoriList ->
+            // Set up RecyclerView dengan kategori yang diterima
+            val kategoriAdminAdapter = KategoriAdminAdapter()
+            binding.rvKategoriBerandaAdmin.apply {
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = kategoriAdminAdapter
+                setHasFixedSize(true)
+            }
+            kategoriAdminAdapter.submitList(kategoriList)
 
         }
+
     }
+
 
 
 

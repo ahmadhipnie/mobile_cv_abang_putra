@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 // After the splash screen, open OnboardingActivity
-                startActivity(Intent(this, OnboardingActivity::class.java))
+                startActivity(Intent(this, OnboardingActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                 overridePendingTransition(
                     R.anim.fade_in,
                     R.anim.fade_out

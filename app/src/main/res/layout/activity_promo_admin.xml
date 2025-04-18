@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,105 +7,104 @@
     android:layout_height="match_parent"
     tools:context=".admin.ui.PromoActivityAdmin">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayoutPromoAdmin"
+    <!-- Konten Scrollable -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="15dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"> <!-- agar isi tidak ketiban FAB -->
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBarPromoAdmin"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/btn_back_promo_admin"
-                android:layout_width="wrap_content"
+            <!-- AppBar -->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarPromoAdmin"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                android:background="@android:color/transparent"
-                android:layout_marginHorizontal="20dp"
-                android:layout_gravity="start"
-                app:tint="@color/black" />
+                android:background="@color/white"
+                android:elevation="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/btn_back_promo_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+                    android:background="@android:color/transparent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="start"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="promo"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="18sp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center" />
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <!-- Search -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_layout_search_pencarian_promo_admin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="promo"
-                android:textColor="@color/black"
-                android:fontFamily="@font/inter_semibold"
-                android:textSize="18sp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_gravity="center"/>
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:hint="Cari Promo"
+                app:boxBackgroundColor="@color/white"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp">
 
-        </com.google.android.material.appbar.MaterialToolbar>
+                <EditText
+                    android:id="@+id/et_search_pencarian_promo_admin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_search_true"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_promo_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="10dp"
+                tools:listitem="@layout/promo_item" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_layout_search_pencarian_promo_admin"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+    <!-- ProgressBar di tengah -->
+    <ProgressBar
+        android:id="@+id/progressBarPromoAdmin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
-        android:hint="Cari Promo"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomEnd="25dp"
-        app:boxCornerRadiusBottomStart="25dp"
-        app:boxCornerRadiusTopEnd="25dp"
-        app:boxCornerRadiusTopStart="25dp"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:boxStrokeWidth="2dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPromoAdmin">
+        android:layout_gravity="center" />
 
-        <EditText
-            android:id="@+id/et_search_pencarian_promo_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_search_true"
-            android:ems="10"
-            android:inputType="text"
-            android:lines="1"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_promo_admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_layout_search_pencarian_promo_admin"
-        tools:listitem="@layout/promo_item"
-        android:layout_marginTop="10dp"/>
-
-
+    <!-- FloatingActionButton di kanan bawah -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_promo_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="bottom|end"
         android:layout_margin="30dp"
         android:src="@drawable/ic_add"
-        app:tint="@color/white"/>
+        app:tint="@color/white" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/progressBarPromoAdmin"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
