@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="16sp"
-            android:fontFamily="@font/inter_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/black"
             tools:text="@string/app_name"
             android:maxLines="1"/>

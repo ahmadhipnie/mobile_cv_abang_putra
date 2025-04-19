@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text="Segera Sebelum Kehabisan"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:textSize="14sp"/>
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:text="Nama Barang"
                 android:textSize="18sp"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_marginTop="4dp"/>
 
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="tanggal mulai - tanggal selesai"
                 android:textSize="18sp"
-                android:fontFamily="@font/inter_bold"
+                android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginTop="14dp"/>
 
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Deskripsi"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:textSize="14sp"
                 android:layout_marginTop="10dp"/>
 
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Deskripsi Barang"
-                android:fontFamily="@font/inter_light"
+                android:fontFamily="@font/poppins_light"
                 android:clickable="true"
                 android:focusable="true"
                 android:textSize="14sp"
@@ -127,18 +127,18 @@
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_edit_detail_promo_admin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_button"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Edit Promo"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_edit_detail_promo_admin"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginHorizontal="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/bg_button"-->
+<!--                    android:fontFamily="@font/poppins_medium"-->
+<!--                    android:text="Edit Promo"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/white" />-->
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_hapus_detail_promo_admin"
@@ -149,7 +149,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_button"
                     android:backgroundTint="@color/red"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Hapus Promo"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />

@@ -276,22 +276,4 @@ class DetailBarangActivityReseller : AppCompatActivity() {
         }
     }
 
-    private fun kirimPesanWhatsApp() {
-//        // Nomor WhatsApp yang ingin dihubungi
-//        val nomorWhatsApp = "+6281333100497"
-//
-//        val pesan = """
-//            Pertanyaan dari: $namaPengirim
-//            NISN : $nisnString
-//            Pertanyaan :
-//
-//            $pertanyaan
-//            """.trimIndent()
-//
-//        // Membuat format URI untuk intent WhatsApp
-//        val url =
-//            "https://api.whatsapp.com/send?phone=" + nomorWhatsApp + "&text=" + Uri.encode(pesan)
-//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//        startActivity(intent)
-    }
 }

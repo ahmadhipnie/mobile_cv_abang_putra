@@ -33,7 +33,7 @@
                 android:text="@string/email"
                 android:layout_marginTop="5dp"
                 android:textSize="20sp"
-                android:fontFamily="@font/inter_semibold"/>
+                android:fontFamily="@font/poppins_semibold"/>
 
             <LinearLayout
                 android:id="@+id/ll_menu_beranda_admin"
@@ -70,7 +70,7 @@
                             android:layout_marginBottom="10dp"
                             android:text="Barang"
                             android:textAlignment="center"
-                            android:fontFamily="@font/inter_semibold"
+                            android:fontFamily="@font/poppins_semibold"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +108,7 @@
                             android:layout_marginBottom="10dp"
                             android:text="Promo"
                             android:textAlignment="center"
-                            android:fontFamily="@font/inter_semibold"
+                            android:fontFamily="@font/poppins_semibold"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"

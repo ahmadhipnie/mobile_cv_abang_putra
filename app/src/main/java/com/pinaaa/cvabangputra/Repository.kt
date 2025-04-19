@@ -40,17 +40,17 @@ class Repository private constructor(private val apiService: ApiService) {
 //        return response.dataFeedback?.filterNotNull() ?: emptyList()  // Mengambil data barang
 //    }
 
-    suspend fun getBarangByKategori(kategoriId: Int): List<DataBarangItem> {
-        // Pemanggilan API secara langsung menggunakan suspend function
-        val response = apiService.getBarangByKategori(kategoriId)  // Memanggil API
-        return response.dataBarang?.filterNotNull() ?: emptyList()  // Mengambil data barang, filter null values
-    }
+//    suspend fun getBarangByKategori(kategoriId: Int): List<DataBarangItem> {
+//        // Pemanggilan API secara langsung menggunakan suspend function
+//        val response = apiService.getBarangByKategori(kategoriId)  // Memanggil API
+//        return response.dataBarang?.filterNotNull() ?: emptyList()  // Mengambil data barang, filter null values
+//    }
 
-    suspend fun getBarangsBySearch(namaBarang: String, kategoriId: Int ): List<DataBarangItem> {
-        // Pemanggilan API secara langsung menggunakan suspend function
-        val response = apiService.getBarangsBySearch(namaBarang, kategoriId)  // Memanggil API
-        return response.dataBarang?.filterNotNull() ?: emptyList()  // Mengambil data barang, filter null values
-    }
+//    suspend fun getBarangsBySearch(namaBarang: String, kategoriId: Int ): List<DataBarangItem> {
+//        // Pemanggilan API secara langsung menggunakan suspend function
+//        val response = apiService.getBarangsBySearch(namaBarang, kategoriId)  // Memanggil API
+//        return response.dataBarang?.filterNotNull() ?: emptyList()  // Mengambil data barang, filter null values
+//    }
 
 
 

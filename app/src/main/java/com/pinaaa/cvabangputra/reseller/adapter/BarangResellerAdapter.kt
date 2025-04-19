@@ -52,7 +52,7 @@ class BarangResellerAdapter(private val coroutineScope: CoroutineScope, private 
                 data.stokBarang!!,
                 data.deskripsiBarang!!,
                 data.satuan!!,
-                data.namaKategori!!,
+                data.namaKategori ?: "Kategori tidak tersedia", // Menangani null pada namaKategori
                 data.gambarUrl!!
             )
             // Observasi apakah barang ada di database

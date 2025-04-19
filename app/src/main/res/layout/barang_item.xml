@@ -40,7 +40,7 @@
             android:layout_marginHorizontal="10dp"
             android:text="Nama Barang"
             android:textColor="@color/white"
-            android:fontFamily="@font/inter_bold"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_harga_barang"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +53,7 @@
             android:layout_marginBottom="20dp"
             android:text="Rp.150.0000"
             android:textColor="@color/white"
-            android:fontFamily="@font/inter_bold"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

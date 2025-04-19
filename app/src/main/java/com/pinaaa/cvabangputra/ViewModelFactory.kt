@@ -49,7 +49,7 @@ class ViewModelFactory private constructor(private val repository: Repository): 
                 DetailBarangResellerViewModel(repository) as T
             }
             modelClass.isAssignableFrom(PencarianBarangResellerViewModel::class.java) -> {
-                PencarianBarangResellerViewModel(repository) as T
+                PencarianBarangResellerViewModel() as T
             }
             modelClass.isAssignableFrom(DetailPromoResellerViewModel::class.java) -> {
                 DetailPromoResellerViewModel(repository) as T

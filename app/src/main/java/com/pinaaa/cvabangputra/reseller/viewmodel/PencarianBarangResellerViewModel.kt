@@ -3,12 +3,12 @@ package com.pinaaa.cvabangputra.reseller.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.pinaaa.cvabangputra.Repository
+import com.pinaaa.cvabangputra.data.remote.ApiConfig
+import com.pinaaa.cvabangputra.data.remote.response.reseller.BarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataBarangItem
-import kotlinx.coroutines.launch
+import retrofit2.Callback
 
-class PencarianBarangResellerViewModel(private val repository: Repository) : ViewModel() {
+class PencarianBarangResellerViewModel : ViewModel() {
 
     private val _barang = MutableLiveData<List<DataBarangItem>>()
     val barang: LiveData<List<DataBarangItem>> get() = _barang
@@ -20,33 +20,59 @@ class PencarianBarangResellerViewModel(private val repository: Repository) : Vie
     val loading: LiveData<Boolean> get() = _loading
 
     fun getBarangByKategori(kategoriId: Int) {
-        viewModelScope.launch {
-            try {
-                _loading.postValue(true)
-                val result = repository.getBarangByKategori(kategoriId)
-                _barang.postValue(result)
-            } catch (e: Exception) {
-                _error.postValue(e.message ?: "An unexpected error occurred")
-            } finally {
-                _loading.postValue(false)
+        _loading.value = true
+
+        val client = ApiConfig.getApiService().getBarangByKategori(kategoriId)
+        client.enqueue(object : Callback<BarangResponse> {
+            override fun onResponse(
+                call: retrofit2.Call<BarangResponse>,
+                response: retrofit2.Response<BarangResponse>
+            ) {
+                _loading.value = false
+                if (response.isSuccessful) {
+                    val barangResponse = response.body()
+                    barangResponse?.let {
+                        _barang.value = it.dataBarang
+                    }
+                } else {
+                    _error.value = "Error: ${response.message()}"
+                }
             }
-        }
+
+            override fun onFailure(call: retrofit2.Call<BarangResponse>, t: Throwable) {
+                _loading.value = false
+                _error.value = "Failure: ${t.message}"
+            }
+        })
     }
 
     fun getBarangsBySearch(namaBarang: String, kategoriId: Int) {
-        viewModelScope.launch {
-            try {
-                _loading.postValue(true)
-                val result = repository.getBarangsBySearch(namaBarang, kategoriId)
-                _barang.postValue(result)
-            } catch (e: Exception) {
-                _error.postValue(e.message ?: "An unexpected error occurred")
-            } finally {
-                _loading.postValue(false)
+        _loading.value = true
+
+        val client = ApiConfig.getApiService().getBarangsBySearch(namaBarang, kategoriId)
+        client.enqueue(object : retrofit2.Callback<BarangResponse> {
+            override fun onResponse(
+                call: retrofit2.Call<BarangResponse>,
+                response: retrofit2.Response<BarangResponse>
+            ) {
+                _loading.value = false
+                if (response.isSuccessful) {
+                    val barangResponse = response.body()
+                    barangResponse?.let {
+                        _barang.value = it.dataBarang
+                    }
+                } else {
+                    _error.value = "Error: ${response.message()}"
+                }
             }
-        }
+
+            override fun onFailure(call: retrofit2.Call<BarangResponse>, t: Throwable) {
+                _loading.value = false
+                _error.value = "Failure: ${t.message}"
+            }
+        })
     }
 
-   
+
 }
 

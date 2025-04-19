@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="Search"
                 android:textColor="@color/black"
-                android:fontFamily="@font/inter_extrabold"
+                android:fontFamily="@font/poppins_extrabold"
                 android:textSize="18sp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_gravity="center"/>

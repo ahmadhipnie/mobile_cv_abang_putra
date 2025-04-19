@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tambah Promo"
                 android:textColor="@color/black"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:textSize="18sp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_gravity="center"/>

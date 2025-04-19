@@ -3,6 +3,8 @@ package com.pinaaa.cvabangputra.reseller.ui
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -47,21 +49,44 @@ class PencarianBarangActivityReseller : AppCompatActivity() {
         namaKategori = intent.getStringExtra("namaKategori")
         jumlahBarang = intent.getIntExtra("jumlahBarang", 0)
 
+        // Set title dan jumlah item
         binding.tvTitlePencarianBarangReseller.text = "Kategori $namaKategori"
         binding.tvJumlahItemPencarianBarangReseller.text = "$jumlahBarang Items"
 
+        // Button kembali
         binding.btnBackPencarianBarangReseller.setOnClickListener {
-           finish()
+            finish()
+        }
+
+        // Setup RecyclerView
+        val databaseRepository = DatabaseRepository.getInstance(application)
+        val barangAdapter = BarangResellerAdapter(coroutineScope, databaseRepository)
+        binding.rvPencarianBarangReseller.apply {
+            layoutManager = GridLayoutManager(context, 2)  // Menggunakan 2 kolom
+            adapter = barangAdapter
+            setHasFixedSize(true)
         }
 
         // Mengambil data berdasarkan kategori jika kategoriId tidak null
-        kategoriId?.let { pencarianBarangResellerViewModel.getBarangByKategori(it) }
-
-        // Setup RecyclerView
-        setupRecyclerViewBarang()
+        kategoriId?.let {
+            // Pastikan kita mengambil data pertama kali meskipun tidak ada pencarian
+            pencarianBarangResellerViewModel.getBarangByKategori(it)
+        }
 
         // Observe perubahan data barang di ViewModel
-        observeViewModel()
+        pencarianBarangResellerViewModel.barang.observe(this, { barangList ->
+            // Update RecyclerView dengan data barang
+            (binding.rvPencarianBarangReseller.adapter as BarangResellerAdapter).submitList(barangList)
+
+            // Menyembunyikan progress bar jika data sudah dimuat
+            binding.progressBarPencarianBarangReseller.visibility = View.GONE
+        })
+
+        // Mengamati error message jika terjadi kesalahan
+        pencarianBarangResellerViewModel.error.observe(this, { errorMessage ->
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            binding.progressBarPencarianBarangReseller.visibility = View.GONE
+        })
 
         // Menangani pencarian ketika pengguna menekan tombol enter
         binding.etSearchPencarianBarangReseller.setOnEditorActionListener { _, _, _ ->
@@ -72,32 +97,27 @@ class PencarianBarangActivityReseller : AppCompatActivity() {
             }
             true
         }
+
+        // Setup pencarian berbasis text change
+        setupSearchFeature()
     }
 
-    private fun setupRecyclerViewBarang() {
-        // Setup RecyclerView dengan Adapter BarangResellerAdapter
-        val databaseRepository = DatabaseRepository.getInstance(application)
-        val barangAdapter = BarangResellerAdapter(coroutineScope,databaseRepository)
-        binding.rvPencarianBarangReseller.apply {
-            layoutManager = GridLayoutManager(context, 2)  // Menggunakan 2 kolom
-            adapter = barangAdapter
-            setHasFixedSize(true)
-        }
-    }
+    private fun setupSearchFeature() {
+        binding.etSearchPencarianBarangReseller.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    private fun observeViewModel() {
-        // Mengamati data barang yang diterima dari ViewModel
-        pencarianBarangResellerViewModel.barang.observe(this, { barangList ->
-            // Update RecyclerView dengan data barang
-            (binding.rvPencarianBarangReseller.adapter as BarangResellerAdapter).submitList(barangList)
-            // Menyembunyikan progress bar jika data sudah dimuat
-            binding.progressBarPencarianBarangReseller.visibility = View.GONE
-        })
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString()
+                if (query.isNotEmpty()) {
+                    pencarianBarangResellerViewModel.getBarangsBySearch(query, kategoriId!!)
+                } else {
+                    // Menangani pencarian kosong
+                    pencarianBarangResellerViewModel.getBarangsBySearch("", kategoriId!!)
+                }
+            }
 
-        // Mengamati error message jika terjadi kesalahan
-        pencarianBarangResellerViewModel.error.observe(this, { errorMessage ->
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-            binding.progressBarPencarianBarangReseller.visibility = View.GONE
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 }
+

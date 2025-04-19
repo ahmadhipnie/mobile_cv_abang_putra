@@ -118,9 +118,6 @@ class DetailPromoActivityAdmin : AppCompatActivity() {
             Log.e(TAG, "onCreate: $errorMessage")
         }
 
-
-
-
     }
 
     private fun formatTanggal(dateString: String): String {

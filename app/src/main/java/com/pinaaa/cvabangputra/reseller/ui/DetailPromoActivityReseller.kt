@@ -2,22 +2,28 @@ package com.pinaaa.cvabangputra.reseller.ui
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.pinaaa.cvabangputra.R
 import com.pinaaa.cvabangputra.ViewModelFactory
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.databinding.ActivityDetailPromoResellerBinding
-import com.pinaaa.cvabangputra.reseller.viewmodel.DetailBarangResellerViewModel
+import com.pinaaa.cvabangputra.reseller.fragment.FullScreenImageFragment
 import com.pinaaa.cvabangputra.reseller.viewmodel.DetailPromoResellerViewModel
+
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -75,6 +81,28 @@ class DetailPromoActivityReseller : AppCompatActivity() {
             btnBackDetailPromoReseller.setOnClickListener {
                 finish()
             }
+
+
+
+
+
+            btnHubungiAdminDetailPromoReseller.setOnClickListener {
+                //cara lain untuk mengirimkan ke wa tanpa gambar
+                // Nomor WhatsApp yang ingin dihubungi
+                val nomorWhatsApp = "+6282268672361"
+
+                val pesan = """
+            apakah promo dengan nama $namaPromo
+            dengan gambar dari link berikut masih ada
+            ${apiConfig.URL}$gambarUrl
+            """.trimIndent()
+
+                // Membuat format URI untuk intent WhatsApp
+                val url =
+                    "https://api.whatsapp.com/send?phone=" + nomorWhatsApp + "&text=" + Uri.encode(pesan)
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
         }
 
         detailPromoResellerViewModel.getImagesPromoByIdPromo(promoId)
@@ -97,5 +125,27 @@ class DetailPromoActivityReseller : AppCompatActivity() {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             Log.e(TAG, "onCreate: $errorMessage")
         }
+
+        binding.imageSliderDetailPromoReseller.setItemClickListener(object : ItemClickListener {
+            override fun doubleClick(position: Int) {
+
+            }
+
+            override fun onItemSelected(position: Int) {
+                // Membuka gambar di full screen
+                if (gambarUrl != null) {
+                    openImageInFullScreen(gambarUrl.toString())
+                }
+            }
+        })
     }
+
+    // Fungsi untuk membuka gambar di full-screen
+    private fun openImageInFullScreen(imageUrl: String) {
+        val fullScreenImageFragment = FullScreenImageFragment.newInstance(imageUrl)
+        fullScreenImageFragment.show(supportFragmentManager, "FullScreenImage")
+    }
+
+
+
 }

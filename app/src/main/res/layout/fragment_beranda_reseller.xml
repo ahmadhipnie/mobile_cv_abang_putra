@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Selamat Datang"
             android:textSize="14sp"
-            android:fontFamily="@font/inter_light"/>
+            android:fontFamily="@font/poppins_light"/>
 
         <TextView
             android:id="@+id/tv_nama_user_beranda_reseller"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Nama User"
             android:textSize="18sp"
-            android:fontFamily="@font/inter_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_marginTop="4dp"/>
 
         <!-- Image Slider -->
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Kategori"
             android:textSize="18sp"
-            android:fontFamily="@font/inter_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_marginTop="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:text="Paling Banyak Dibeli"
             android:textSize="18sp"
-            android:fontFamily="@font/inter_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_marginTop="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView

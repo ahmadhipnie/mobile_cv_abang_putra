@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="Profil Admin"
                 android:textColor="@color/black"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:textSize="18sp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_gravity="center"/>
@@ -46,7 +46,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/inter_semibold"
+        android:fontFamily="@font/poppins_semibold"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayoutProfilAdmin"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -60,7 +60,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email_profil_admin"/>
 
@@ -73,7 +73,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/inter_semibold"
+        android:fontFamily="@font/poppins_semibold"
         app:layout_constraintTop_toBottomOf="@+id/tv_email_profil_admin_value"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -87,7 +87,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_password_profil_admin"/>
 
@@ -110,7 +110,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
             android:background="@drawable/bg_button"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="Ubah Password"
             android:textAllCaps="false"
             android:textColor="@color/white" />
@@ -124,7 +124,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_button"
             android:backgroundTint="@color/red"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="Logout"
             android:textAllCaps="false"
             android:textColor="@color/white" />

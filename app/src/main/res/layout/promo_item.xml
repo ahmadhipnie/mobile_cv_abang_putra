@@ -42,7 +42,7 @@
             android:layout_marginEnd="8dp"
             android:layout_toEndOf="@id/cv_img_item_promo_admin"
             android:textSize="16sp"
-            android:fontFamily="@font/inter_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/black"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/cv_img_item_promo_admin"
@@ -61,7 +61,7 @@
             tools:text="tanggal awal :"
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/inter"
+            android:fontFamily="@font/poppins"
             android:maxLines="1"
             android:ellipsize="end"/>
 
@@ -76,7 +76,7 @@
             android:text="tanggal akhir : "
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/inter"
+            android:fontFamily="@font/poppins"
             android:maxLines="1"
             android:ellipsize="end"/>
 

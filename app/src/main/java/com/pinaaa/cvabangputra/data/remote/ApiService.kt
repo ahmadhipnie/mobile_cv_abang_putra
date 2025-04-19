@@ -70,9 +70,9 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("getBarangsByKategori")
-    suspend fun getBarangByKategori(
+    fun getBarangByKategori(
         @Field("kategori_id") kategori_id: Int
-    ): BarangResponse
+    ): Call<BarangResponse>
 
     @FormUrlEncoded
     @POST("kirimFeedbackReseller")
@@ -119,10 +119,10 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("getBarangsBySearch")
-    suspend fun getBarangsBySearch(
+    fun getBarangsBySearch(
         @Field("nama_barang") nama_barang: String,
         @Field("kategori_id") kategori_id: Int
-    ): BarangResponse
+    ): Call<BarangResponse>
 
     @FormUrlEncoded
     @POST("getBarangsBySearchAdmin")

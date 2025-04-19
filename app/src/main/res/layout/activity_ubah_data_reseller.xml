@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ubah data profil"
                 android:textColor="@color/black"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:textSize="18sp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_gravity="center"/>
@@ -82,7 +82,7 @@
             android:text="klik untuk ubah foto profil"
             android:textSize="12sp"
             android:textColor="@android:color/darker_gray"
-            android:fontFamily="@font/inter_light"/>
+            android:fontFamily="@font/poppins_light"/>
 
         <TextView
             android:id="@+id/tv_nama_ubah_data_reseller"
