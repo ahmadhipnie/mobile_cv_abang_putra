@@ -109,6 +109,8 @@ interface ApiService {
     ): Call<FeedbackResponse>
 
 
+
+
     @Multipart
     @POST("updateUserReseller")
     suspend fun updateUserReseller(
@@ -191,6 +193,15 @@ interface ApiService {
     @Multipart
     @POST("updateBarang")
     fun updateBarang(
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part gambarUrl1: MultipartBody.Part? = null,
+        @Part gambarUrl2: MultipartBody.Part? = null,
+        @Part gambarUrl3: MultipartBody.Part? = null
+    ): Call<FeedbackResponse>
+
+    @Multipart
+    @POST("updatePromo")
+    fun updatePromo(
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
         @Part gambarUrl1: MultipartBody.Part? = null,
         @Part gambarUrl2: MultipartBody.Part? = null,

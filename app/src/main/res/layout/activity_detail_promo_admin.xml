@@ -127,18 +127,18 @@
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
-<!--                <androidx.appcompat.widget.AppCompatButton-->
-<!--                    android:id="@+id/btn_edit_detail_promo_admin"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_marginHorizontal="10dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:background="@drawable/bg_button"-->
-<!--                    android:fontFamily="@font/poppins_medium"-->
-<!--                    android:text="Edit Promo"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    android:textColor="@color/white" />-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_edit_detail_promo_admin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Edit Promo"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_hapus_detail_promo_admin"

@@ -170,6 +170,65 @@ class PromoAdminViewModel : ViewModel() {
         })
     }
 
+
+    fun updatePromo(idPromo: Int,
+        namaPromo: String, deskripsiPromo : String, tanggalPeriodeAwal : String , tanggalPeriodeAkhir : String ,
+        gambar1: File?, gambar2: File?, gambar3: File?
+    ) {
+        _isLoading.value = true
+
+        // Prepare RequestBody for other data (non-file)
+        val idPromoRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), idPromo.toString())
+        val namaPromoRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), namaPromo)
+        val deskripsiPromoRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), deskripsiPromo)
+        val tanggalPeriodeAwalRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalPeriodeAwal)
+        val tanggalPeriodeAkhirRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalPeriodeAkhir)
+
+        // Prepare MultipartBody.Part for images
+        val gambarUrl1Part = gambar1?.let {
+            val file = File(it.path!!)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            MultipartBody.Part.createFormData("gambar_url_1", file.name, requestBody)
+        }
+
+        val gambarUrl2Part = gambar2?.let {
+            val file = File(it.path!!)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            MultipartBody.Part.createFormData("gambar_url_2", file.name, requestBody)
+        }
+
+        val gambarUrl3Part = gambar3?.let {
+            val file = File(it.path!!)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            MultipartBody.Part.createFormData("gambar_url_3", file.name, requestBody)
+        }
+
+        val params = mutableMapOf<String, RequestBody>()
+        params["id_promo"] = idPromoRequest
+        params["nama_promo"] = namaPromoRequest
+        params["deskripsi_promo"] = deskripsiPromoRequest
+        params["tanggal_periode_awal"] = tanggalPeriodeAwalRequest
+        params["tanggal_periode_akhir"] = tanggalPeriodeAkhirRequest
+
+        // Call API to add Barang
+        val client = ApiConfig.getApiService().updatePromo(params, gambarUrl1Part, gambarUrl2Part, gambarUrl3Part)
+        client.enqueue(object : Callback<FeedbackResponse> {
+            override fun onResponse(call: Call<FeedbackResponse>, response: Response<FeedbackResponse>) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    _feedbackResponse.value = response.body()
+                } else {
+                    Log.e("PromoAdminViewModel", "Failed: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<FeedbackResponse>, t: Throwable) {
+                _isLoading.value = false
+                Log.e("PromoAdminViewModel", "onFailure: ${t.message}", t)
+            }
+        })
+    }
+
 }
 
 

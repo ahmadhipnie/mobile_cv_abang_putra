@@ -1,6 +1,7 @@
 package com.pinaaa.cvabangputra.admin.ui
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -67,6 +68,20 @@ class DetailPromoActivityAdmin : AppCompatActivity() {
 
         binding.tvDeskripsiPromoDetailPromoAdmin.text = deskripsiPromo
 
+        binding.btnEditDetailPromoAdmin.setOnClickListener{
+            Intent(this, UpdatePromoActivityAdmin::class.java).apply {
+                putExtra("idPromo", idPromo)
+                putExtra("namaPromo", namaPromo)
+                putExtra("tanggalPeriodeAwal", tanggalPeriodeAwal)
+                putExtra("tanggalPeriodeAkhir", tanggalPeriodeAkhir)
+                putExtra("gambarUrl", gambarUrl)
+                putExtra("created_at", createdAt)
+                putExtra("updated_at", updatedAt)
+                putExtra("deskripsiPromo", deskripsiPromo)
+            }.also {
+                startActivity(it)
+            }
+        }
         binding.btnBackDetailPromoAdmin.setOnClickListener {
             finish()
         }
