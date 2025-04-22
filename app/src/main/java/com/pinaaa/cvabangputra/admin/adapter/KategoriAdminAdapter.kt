@@ -1,5 +1,6 @@
 package com.pinaaa.cvabangputra.admin.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -9,40 +10,39 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
-import com.bumptech.glide.annotation.GlideModule
 import com.pinaaa.cvabangputra.R
-import com.pinaaa.cvabangputra.data.remote.ApiConfig
+import com.pinaaa.cvabangputra.admin.ui.UbahKategoriAdminActivity
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
 import com.pinaaa.cvabangputra.databinding.KategoriItemBinding
-import com.pinaaa.cvabangputra.reseller.adapter.KategoriResellerAdapter
-import com.pinaaa.cvabangputra.reseller.ui.PencarianBarangActivityReseller
+import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
+import com.pinaaa.cvabangputra.data.remote.ApiConfig
 
-class KategoriAdminAdapter : ListAdapter<DataItem, KategoriAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
+class KategoriAdminAdapter(private val context: Context, private val viewModel: BarangAdminViewModel) :
+    ListAdapter<DataItem, KategoriAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
+    val apiConfig = ApiConfig()
 
-    @GlideModule
     inner class ViewHolder(private val binding: KategoriItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val ivKategori: ImageView = binding.ivLogoKategori
         val namaKategori: TextView = binding.tvNamaKategori
+
         fun bind(data: DataItem) {
             Glide.with(itemView.context)
-                .load(apiConfig.URL+data.imageUrl)
+                .load(apiConfig.URL + data.imageUrl)
                 .centerCrop()
                 .into(ivKategori)
             namaKategori.text = data.namaKategori
             namaKategori.setTextColor(Color.parseColor("#000000"))
 
             itemView.setOnClickListener {
-//                Intent(itemView.context, PencarianBarangActivityAdmin::class.java).apply {
-//                    putExtra("idKategori", data.idKategori)
-//                    putExtra("namaKategori", data.namaKategori)
-//                    putExtra("jumlahBarang", data.jumlahBarang)
-//                    itemView.context.startActivity(this)
-//                }
-
+                val intent = Intent(itemView.context, UbahKategoriAdminActivity::class.java)
+                intent.putExtra("idKategori", data.idKategori)
+                intent.putExtra("namaKategori", data.namaKategori)
+                intent.putExtra("imageUrl", data.imageUrl)
+                itemView.context.startActivity(intent)
             }
         }
     }
@@ -59,7 +59,6 @@ class KategoriAdminAdapter : ListAdapter<DataItem, KategoriAdminAdapter.ViewHold
         }
     }
 
-
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
             override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
@@ -75,4 +74,19 @@ class KategoriAdminAdapter : ListAdapter<DataItem, KategoriAdminAdapter.ViewHold
         }
     }
 
+    // Fungsi untuk menampilkan konfirmasi dialog sebelum menghapus kategori
+    fun showDeleteConfirmationDialog(data: DataItem) {
+        val dialogBuilder = AlertDialog.Builder(context)
+        dialogBuilder.setTitle("Konfirmasi Hapus Kategori")
+            .setMessage("Apakah Anda yakin ingin menghapus kategori ini?")
+            .setPositiveButton("Hapus") { dialog, _ ->
+                viewModel.deleteKategoriWithCheck(data.idKategori!!)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
 }

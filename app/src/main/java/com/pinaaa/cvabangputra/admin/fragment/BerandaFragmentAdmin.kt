@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.pinaaa.cvabangputra.ViewModelFactory
 import com.pinaaa.cvabangputra.admin.adapter.KategoriAdminAdapter
 import com.pinaaa.cvabangputra.admin.ui.BarangActivityAdmin
@@ -71,13 +73,11 @@ class BerandaFragmentAdmin : Fragment() {
             }
         }
 
-
-
+        // Fetch kategori from ViewModel
         barangAdminViewModel.fetchKategori()
-        // Observasi kategori dari ViewModel
-        barangAdminViewModel.kategoriList.observe(requireActivity()) { kategoriList ->
-            // Set up RecyclerView dengan kategori yang diterima
-            val kategoriAdminAdapter = KategoriAdminAdapter()
+        // Observe kategori from ViewModel
+        barangAdminViewModel.kategoriList.observe(viewLifecycleOwner) { kategoriList ->
+            val kategoriAdminAdapter = KategoriAdminAdapter(requireContext(), barangAdminViewModel)
             binding.rvKategoriBerandaAdmin.apply {
                 layoutManager = GridLayoutManager(context, 2)
                 adapter = kategoriAdminAdapter
@@ -85,11 +85,19 @@ class BerandaFragmentAdmin : Fragment() {
             }
             kategoriAdminAdapter.submitList(kategoriList)
 
+            // Set up ItemTouchHelper for swipe to delete
+            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                override fun onMove(
+                    recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
+                ): Boolean = false
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    // Get the item that was swiped
+                    val kategoriItem = kategoriAdminAdapter.currentList[viewHolder.adapterPosition]
+                    kategoriAdminAdapter.showDeleteConfirmationDialog(kategoriItem)
+                }
+            })
+            itemTouchHelper.attachToRecyclerView(binding.rvKategoriBerandaAdmin)
         }
-
     }
-
-
-
-
 }

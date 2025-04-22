@@ -173,4 +173,27 @@ interface ApiService {
         @Field("nama_promo") nama_barang: String
     ): Call<PromoAdminResponse>
 
+
+    @FormUrlEncoded
+    @POST("deleteKategoriWithCheck")
+    fun deleteKategoriWithCheck(
+        @Field("id_kategori") idKategori: Int
+    ): Call<FeedbackResponse>
+
+    @Multipart
+    @POST("updateKategori")
+    suspend fun updateKategori(
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part photo: MultipartBody.Part? = null
+    ): FeedbackResponse
+
+
+    @Multipart
+    @POST("updateBarang")
+    fun updateBarang(
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part gambarUrl1: MultipartBody.Part? = null,
+        @Part gambarUrl2: MultipartBody.Part? = null,
+        @Part gambarUrl3: MultipartBody.Part? = null
+    ): Call<FeedbackResponse>
 }

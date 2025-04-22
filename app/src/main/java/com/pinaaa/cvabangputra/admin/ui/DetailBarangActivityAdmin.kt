@@ -77,6 +77,19 @@ class DetailBarangActivityAdmin : AppCompatActivity() {
                 .show()
         }
 
+        binding.btnEditDetailBarangAdmin.setOnClickListener{
+            val intent = Intent(this, updateBarangActivityAdmin::class.java)
+            intent.putExtra("idBarang", idBarang)
+            intent.putExtra("namaBarang", namaBarang)
+            intent.putExtra("hargaBarang", hargaBarang)
+            intent.putExtra("deskripsiBarang", deskripsiBarang)
+            intent.putExtra("gambarUrl", gambarUrl)
+            intent.putExtra("satuanBarang", satuanBarang)
+            intent.putExtra("stokBarang", stokBarang)
+            intent.putExtra("namaKategori", namaKategori)
+            startActivity(intent)
+        }
+
         barangAdminViewModel.deleteBarangStatus.observe(this) { isDeleted ->
             if (isDeleted) {
                 Toast.makeText(this, "Barang deleted successfully", Toast.LENGTH_SHORT).show()

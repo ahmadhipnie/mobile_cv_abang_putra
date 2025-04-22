@@ -1,6 +1,7 @@
 package com.pinaaa.cvabangputra.admin.viewmodel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,9 @@ class StokBarangViewModel: ViewModel() {
 
     private val _updateStok = MutableLiveData<Boolean>()
     val updateStok: LiveData<Boolean> = _updateStok
+
+
+
 
 
     fun updateStokBarang(idBarang: Int, stokBarang: Int) {
@@ -44,4 +48,6 @@ class StokBarangViewModel: ViewModel() {
             }
         })
     }
+
+
 }
