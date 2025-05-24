@@ -114,18 +114,7 @@
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btn_lupa_password"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:alpha="0"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/lupa_password"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                tools:alpha="100" />
+
 
             <com.pinaaa.cvabangputra.components.CustomButtonLogin
                 android:id="@+id/btn_login"
@@ -138,6 +127,7 @@
                 android:textColor="@color/black"
                 android:text="@string/login"
                 android:textAllCaps="false"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/btn_rounded"
                 tools:alpha="100" />
 

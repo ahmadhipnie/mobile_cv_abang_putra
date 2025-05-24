@@ -45,16 +45,18 @@ class BarangResellerAdapter(private val coroutineScope: CoroutineScope, private 
 
 
 
-            val barangEntity = BarangEntity(
-                data.idBarang!!,
-                data.namaBarang!!,
-                data.hargaBarang!!,
-                data.stokBarang!!,
-                data.deskripsiBarang!!,
-                data.satuan!!,
-                data.namaKategori ?: "Kategori tidak tersedia", // Menangani null pada namaKategori
-                data.gambarUrl!!
-            )
+            val barangEntity = data.gambarUrl?.let {
+                BarangEntity(
+                    data.idBarang!!,
+                    data.namaBarang!!,
+                    data.hargaBarang!!,
+                    data.stokBarang!!,
+                    data.deskripsiBarang!!,
+                    data.satuan!!,
+                    data.namaKategori ?: "Kategori tidak tersedia", // Menangani null pada namaKategori
+                    it
+                )
+            }
             // Observasi apakah barang ada di database
             coroutineScope.launch {
                 databaseRepository.isFavorite(data.idBarang!!).observeForever { barang ->
@@ -73,7 +75,9 @@ class BarangResellerAdapter(private val coroutineScope: CoroutineScope, private 
                         val barang = databaseRepository.isFavorite(data.idBarang!!).value
                         if (barang == null) {
                             // Barang belum ada, tambahkan
-                            databaseRepository.insertBarang(barangEntity)
+                            if (barangEntity != null) {
+                                databaseRepository.insertBarang(barangEntity)
+                            }
                             binding.btnFavorite.setImageResource(R.drawable.ic_favorite_true)
                             Log.d(TAG, "bind: ${data.idBarang} added")
                         } else {

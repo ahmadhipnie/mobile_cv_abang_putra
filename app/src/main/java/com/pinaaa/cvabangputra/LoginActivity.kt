@@ -150,9 +150,6 @@ class LoginActivity : AppCompatActivity() {
         val etLayoutPasswordLoginAnimation =
             ObjectAnimator.ofFloat(binding.etLayoutPasswordLogin, View.ALPHA, 1f)
                 .setDuration(durationAnimation)
-        val btnLupaPasswordAnimation =
-            ObjectAnimator.ofFloat(binding.btnLupaPassword, View.ALPHA, 1f)
-                .setDuration(durationAnimation)
         val btnLoginAnimation =
             ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(durationAnimation)
         val llRegisterLoginAnimation =
@@ -165,7 +162,6 @@ class LoginActivity : AppCompatActivity() {
                 tvEmailLoginAnimation,
                 etLayoutEmailLoginAnimation,
                 etLayoutPasswordLoginAnimation,
-                btnLupaPasswordAnimation,
                 btnLoginAnimation,
                 llRegisterLoginAnimation
             )
