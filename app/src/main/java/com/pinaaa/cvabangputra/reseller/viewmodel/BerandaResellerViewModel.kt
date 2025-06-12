@@ -7,15 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pinaaa.cvabangputra.Repository
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataBarangItem
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataGambarBarangItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataGambarPromoItem
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataKategoriItem
 import kotlinx.coroutines.launch
 
 class BerandaResellerViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _kategori = MutableLiveData<List<DataItem>>()
-    val kategori: LiveData<List<DataItem>> get() = _kategori
+    private val _kategori = MutableLiveData<List<DataKategoriItem>>()
+    val kategori: LiveData<List<DataKategoriItem>> get() = _kategori
 
     private val _barang = MutableLiveData<List<DataBarangItem>>()
     val barang: LiveData<List<DataBarangItem>> get() = _barang

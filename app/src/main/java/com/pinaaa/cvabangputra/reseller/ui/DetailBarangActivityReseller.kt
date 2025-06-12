@@ -52,6 +52,8 @@ class DetailBarangActivityReseller : AppCompatActivity() {
 
         val namaBarang = intent.getStringExtra("namaBarang") ?: ""
         val gambarUrl = intent.getStringExtra("gambarUrl") ?: ""
+        val hargaBarang = intent.getIntExtra("hargaBarang", 0)
+        val idBarang = intent.getIntExtra("idBarang", 0)
         val fullImageUrl = apiConfig.URL + gambarUrl // Gabungkan URL base dengan gambarUrl
 
         binding.tvNamaKategoriDetailBarangReseller.text = intent.getStringExtra("namaKategori")
@@ -105,6 +107,16 @@ class DetailBarangActivityReseller : AppCompatActivity() {
         }
 
         binding.btnPesanSekarangDetailBarangReseller.setOnClickListener {
+            val intent = Intent(this, PesanSekarangActivityReseller::class.java)
+            intent.putExtra("idBarang", idBarang)
+            intent.putExtra("namaBarang", namaBarang)
+            intent.putExtra("hargaBarang", hargaBarang)
+            startActivity(intent)
+
+        }
+
+
+        binding.btnHubungiWhatsappDetailBarangReseller.setOnClickListener {
             val namaBarang = intent.getStringExtra("namaBarang") ?: ""
             val gambarUrl = intent.getStringExtra("gambarUrl") ?: ""
 //            val fullImageUrl = apiConfig.URL + gambarUrl // Gabungkan URL base dengan gambarUrl

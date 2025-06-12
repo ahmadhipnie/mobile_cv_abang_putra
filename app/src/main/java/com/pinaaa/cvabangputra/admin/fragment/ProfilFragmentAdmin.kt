@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pinaaa.cvabangputra.LoginActivity
 import com.pinaaa.cvabangputra.R
+import com.pinaaa.cvabangputra.admin.ui.TransaksiAdminActivity
 import com.pinaaa.cvabangputra.admin.ui.UbahPasswordActivityAdmin
 import com.pinaaa.cvabangputra.databinding.FragmentProfilAdminBinding
 
@@ -46,6 +47,12 @@ class ProfilFragmentAdmin : Fragment() {
         binding.btnUbahPasswordProfilAdmin.setOnClickListener{
             val intent = Intent(requireActivity(), UbahPasswordActivityAdmin::class.java)
             startActivity(intent)
+        }
+
+        binding.btnRiwayatTransaksiProfilAdmin.setOnClickListener {
+            Intent(requireActivity(), TransaksiAdminActivity::class.java).also {
+                startActivity(it)
+            }
         }
 
         binding.btnLogoutProfilAdmin.setOnClickListener {

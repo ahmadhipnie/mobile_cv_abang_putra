@@ -2,17 +2,12 @@ package com.pinaaa.cvabangputra
 
 import com.pinaaa.cvabangputra.data.remote.ApiService
 import com.pinaaa.cvabangputra.data.remote.response.LoginResponse
-import com.pinaaa.cvabangputra.data.remote.response.admin.DataFeedbackItem
-import com.pinaaa.cvabangputra.data.remote.response.reseller.BarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataBarangItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataGambarBarangItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataGambarPromoItem
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataKategoriItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataTransaksiItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.FeedbackResponse
-import com.pinaaa.cvabangputra.data.remote.response.reseller.GambarBarangResponse
-import com.pinaaa.cvabangputra.data.remote.response.reseller.KategoriResponse
-import retrofit2.Call
-import retrofit2.awaitResponse
 
 
 class Repository private constructor(private val apiService: ApiService) {
@@ -22,7 +17,7 @@ class Repository private constructor(private val apiService: ApiService) {
         return apiService.login(email, password)
     }
 
-    suspend fun getKategori(): List<DataItem> {
+    suspend fun getKategori(): List<DataKategoriItem> {
         // Pemanggilan API secara langsung menggunakan suspend function
         val response = apiService.getKategori()
         return response.listData?.filterNotNull() ?: emptyList()  // Mengambil data kategori

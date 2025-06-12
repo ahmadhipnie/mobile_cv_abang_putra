@@ -91,16 +91,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_password_profil_admin"/>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="20dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_password_profil_admin_value">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_password_profil_admin_value">
+        >
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ubah_password_profil_admin"
@@ -116,20 +122,36 @@
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_logout_profil_admin"
+            android:id="@+id/btn_riwayat_transaksi_profil_admin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
             android:background="@drawable/bg_button"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="@color/colorBtnFeedback"
             android:fontFamily="@font/poppins_medium"
-            android:text="Logout"
+            android:text="riwayat transaksi"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
     </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_logout_profil_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_button"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Logout"
+        android:textAllCaps="false"
+        android:layout_margin="10dp"
+        android:textColor="@color/white" />
+</LinearLayout>
+
 
 
 

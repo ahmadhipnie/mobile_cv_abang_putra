@@ -124,16 +124,37 @@
                 android:text="Deskripsi Barang"
                 android:textSize="14sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_pesan_sekarang_detail_barang_reseller"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_button"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Pesan Sekarang"
-                android:textColor="@color/white" />
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_hubungi_whatsapp_detail_barang_reseller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_button"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Hubungi Whatsapp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    android:textColor="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_pesan_sekarang_detail_barang_reseller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_button"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Pesan Sekarang"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

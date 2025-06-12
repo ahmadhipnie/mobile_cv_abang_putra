@@ -24,6 +24,7 @@ import com.pinaaa.cvabangputra.databinding.FragmentBerandaResellerBinding
 import com.pinaaa.cvabangputra.reseller.adapter.BarangResellerAdapter
 import com.pinaaa.cvabangputra.reseller.adapter.KategoriResellerAdapter
 import com.pinaaa.cvabangputra.reseller.ui.DetailPromoActivityReseller
+import com.pinaaa.cvabangputra.reseller.ui.RiwayatActivityReseller
 import com.pinaaa.cvabangputra.reseller.viewmodel.BerandaResellerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -59,6 +60,11 @@ class BerandaFragmentReseller : Fragment() {
         setupRecyclerView()
         setupRecyclerViewBarang()
 
+        binding.btnRiwayatReseller.setOnClickListener {
+            Intent(requireActivity(), RiwayatActivityReseller::class.java).apply {
+                startActivity(this)
+            }
+        }
         // Menampilkan loading sebelum data selesai
         showLoading(true)
 
@@ -71,6 +77,8 @@ class BerandaFragmentReseller : Fragment() {
 
         // Mengamati error jika ada
         observeBarangViewModel()
+
+
 
         berandaResellerViewModel.getAllGambarPromo()
         berandaResellerViewModel.gambarPromo.observe(requireActivity()) { images ->

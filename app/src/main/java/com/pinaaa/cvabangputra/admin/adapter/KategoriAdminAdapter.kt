@@ -12,15 +12,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
-import com.pinaaa.cvabangputra.R
 import com.pinaaa.cvabangputra.admin.ui.UbahKategoriAdminActivity
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
 import com.pinaaa.cvabangputra.databinding.KategoriItemBinding
 import com.pinaaa.cvabangputra.admin.viewmodel.BarangAdminViewModel
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataKategoriItem
 
 class KategoriAdminAdapter(private val context: Context, private val viewModel: BarangAdminViewModel) :
-    ListAdapter<DataItem, KategoriAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<DataKategoriItem, KategoriAdminAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     val apiConfig = ApiConfig()
 
@@ -29,7 +28,7 @@ class KategoriAdminAdapter(private val context: Context, private val viewModel: 
         val ivKategori: ImageView = binding.ivLogoKategori
         val namaKategori: TextView = binding.tvNamaKategori
 
-        fun bind(data: DataItem) {
+        fun bind(data: DataKategoriItem) {
             Glide.with(itemView.context)
                 .load(apiConfig.URL + data.imageUrl)
                 .centerCrop()
@@ -60,14 +59,14 @@ class KategoriAdminAdapter(private val context: Context, private val viewModel: 
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
-            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataKategoriItem>() {
+            override fun areItemsTheSame(oldItem: DataKategoriItem, newItem: DataKategoriItem): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: DataKategoriItem,
+                newItem: DataKategoriItem
             ): Boolean {
                 return oldItem.idKategori == newItem.idKategori
             }
@@ -75,7 +74,7 @@ class KategoriAdminAdapter(private val context: Context, private val viewModel: 
     }
 
     // Fungsi untuk menampilkan konfirmasi dialog sebelum menghapus kategori
-    fun showDeleteConfirmationDialog(data: DataItem) {
+    fun showDeleteConfirmationDialog(data: DataKategoriItem) {
         val dialogBuilder = AlertDialog.Builder(context)
         dialogBuilder.setTitle("Konfirmasi Hapus Kategori")
             .setMessage("Apakah Anda yakin ingin menghapus kategori ini?")

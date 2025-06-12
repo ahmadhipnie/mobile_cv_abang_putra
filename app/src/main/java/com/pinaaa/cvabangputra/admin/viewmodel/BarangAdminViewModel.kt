@@ -1,15 +1,14 @@
 package com.pinaaa.cvabangputra.admin.viewmodel
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.data.remote.response.reseller.BarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataBarangItem
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataKategoriItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataTransaksiItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.FeedbackResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.KategoriResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -26,8 +25,8 @@ class BarangAdminViewModel : ViewModel() {
     private val _barangList = MutableLiveData<List<DataBarangItem>>()
     val barangList: LiveData<List<DataBarangItem>> = _barangList
 
-    private val _kategoriList = MutableLiveData<List<DataItem>>()
-    val kategoriList: LiveData<List<DataItem>> = _kategoriList
+    private val _kategoriList = MutableLiveData<List<DataKategoriItem>>()
+    val kategoriList: LiveData<List<DataKategoriItem>> = _kategoriList
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -83,7 +82,7 @@ class BarangAdminViewModel : ViewModel() {
                     val feedbackResponse = response.body()
                     Log.d("FeedbackViewModel", "Response body: $feedbackResponse")
                     feedbackResponse?.let {
-                        _kategoriList.value = (it.listData as List<DataItem>?)!!
+                        _kategoriList.value = (it.listData as List<DataKategoriItem>?)!!
                     }
                 } else {
                     Log.e("FeedbackViewModel", "Error Response: ${response.errorBody()?.string()}")

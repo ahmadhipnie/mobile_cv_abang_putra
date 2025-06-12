@@ -1,15 +1,14 @@
 package com.pinaaa.cvabangputra.data.remote
 
-import androidx.lifecycle.LiveData
 import com.pinaaa.cvabangputra.data.remote.response.LoginResponse
 import com.pinaaa.cvabangputra.data.remote.response.admin.FeedbackAdminResponse
 import com.pinaaa.cvabangputra.data.remote.response.admin.PromoAdminResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.BarangResponse
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
 import com.pinaaa.cvabangputra.data.remote.response.reseller.FeedbackResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.GambarBarangResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.GambarPromoResponse
 import com.pinaaa.cvabangputra.data.remote.response.reseller.KategoriResponse
+import com.pinaaa.cvabangputra.data.remote.response.reseller.RiwayatTransaksiResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -207,4 +206,24 @@ interface ApiService {
         @Part gambarUrl2: MultipartBody.Part? = null,
         @Part gambarUrl3: MultipartBody.Part? = null
     ): Call<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("addTransaksi")
+    fun addTransaksi(
+        @Field("user_id") userId: Int,
+        @Field("barang_id") barangId: Int,
+        @Field("jumlah_barang") jumlah_barang: Int,
+        @Field("jenis_pengiriman") jenis_pengiriman: String,
+        @Field("total_harga") total_harga: Int,
+    ): Call<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("getTransaksiByUserId")
+    fun getTransaksiByUserId(
+        @Field("user_id") userId: Int,
+    ): Call<RiwayatTransaksiResponse>
+
+
+    @GET("getAllTransaksi")
+    fun getAllTransaksi(): Call<RiwayatTransaksiResponse>
 }

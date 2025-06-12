@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.ui.TransaksiAdminActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutTransaksiAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="15dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBarTransaksiAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageButton
+                android:id="@+id/btn_back_transaksi_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:background="@android:color/transparent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_gravity="start"
+                app:tint="@color/black" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Riwayat Transaksi Admin"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/btn_export_transaksi_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_backup_24"
+                android:background="@android:color/transparent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_gravity="end"
+                app:tint="@color/black" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_riwayat_transaksi_admin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutTransaksiAdmin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

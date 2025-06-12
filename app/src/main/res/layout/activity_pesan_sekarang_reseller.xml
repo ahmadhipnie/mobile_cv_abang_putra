@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    tools:context=".reseller.ui.PesanSekarangActivityReseller">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayoutPesanSekarangReseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="15dp">
+
+
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarPesanSekarangReseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageButton
+                    android:id="@+id/btn_back_pesan_sekarang_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+                    android:background="@android:color/transparent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="start"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Pesan Barang"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPesanSekarangReseller">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Nama Barang"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_layout_nama_barang_pesan_sekarang_reseller"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                android:enabled="false"
+                >
+
+                <EditText
+                    android:id="@+id/et_nama_barang_pesan_sekarang_reseller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:enabled="false"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Jenis Pengiriman"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_layout_spinner_pengiriman"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopStart="25dp">
+
+                <Spinner
+                    android:id="@+id/spinner_pengiriman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Jumlah Barang"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_layout_jumlah_barang_pesan_sekarang_reseller"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopStart="25dp">
+
+                <EditText
+                    android:id="@+id/et_jumlah_barang_pesan_sekarang_reseller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Total Harga Barang"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_layout_total_harga_barang_pesan_sekarang_reseller"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                android:enabled="false"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopStart="25dp">
+
+                <EditText
+                    android:id="@+id/et_total_harga_pesan_sekarang_reseller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_pesan_sekarang_reseller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_button"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Pesan Sekarang"
+                android:layout_marginVertical="20dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

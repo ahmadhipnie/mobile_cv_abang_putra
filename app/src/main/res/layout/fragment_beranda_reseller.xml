@@ -50,7 +50,18 @@
             app:iss_placeholder="@drawable/img_login"
             android:layout_marginTop="12dp"/>
 
-        <!-- Kategori -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_riwayat_reseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/poppins_medium"
+            android:text="tampilkan riwayat"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/white" />
+
         <TextView
             android:id="@+id/tv_kategori_beranda_reseller"
             android:layout_width="match_parent"

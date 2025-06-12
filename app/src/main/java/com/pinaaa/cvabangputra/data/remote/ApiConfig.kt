@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
 
-    var URL_RAW = Uri.parse("http://192.168.1.30:8000/")
+    var URL_RAW = Uri.parse("http://192.168.1.9:8000/")
 
     var URL = URL_RAW.toString()
 
@@ -23,7 +23,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.30:8000/api/") // Sesuaikan base URL
+                .baseUrl("http://192.168.1.9:8000/api/") // Sesuaikan base URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
-import com.pinaaa.cvabangputra.data.remote.response.reseller.DataItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.DataKategoriItem
 import com.pinaaa.cvabangputra.databinding.KategoriItemBinding
 import com.pinaaa.cvabangputra.reseller.ui.PencarianBarangActivityReseller
 
-class KategoriResellerAdapter: ListAdapter<DataItem, KategoriResellerAdapter.ViewHolder>(DIFF_CALLBACK) {
+class KategoriResellerAdapter: ListAdapter<DataKategoriItem, KategoriResellerAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     private val apiConfig = ApiConfig()  // Membuat instance ApiConfig untuk mengakses URL base
 
@@ -24,7 +24,7 @@ class KategoriResellerAdapter: ListAdapter<DataItem, KategoriResellerAdapter.Vie
         RecyclerView.ViewHolder(binding.root) {
         val ivKategori: ImageView = binding.ivLogoKategori
         val namaKategori: TextView = binding.tvNamaKategori
-        fun bind(data: DataItem ) {
+        fun bind(data: DataKategoriItem ) {
             Glide.with(itemView.context)
                 .load(apiConfig.URL+data.imageUrl)
                 .centerCrop()
@@ -57,14 +57,14 @@ class KategoriResellerAdapter: ListAdapter<DataItem, KategoriResellerAdapter.Vie
 
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
-            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataKategoriItem>() {
+            override fun areItemsTheSame(oldItem: DataKategoriItem, newItem: DataKategoriItem): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: DataKategoriItem,
+                newItem: DataKategoriItem
             ): Boolean {
                 return oldItem.idKategori == newItem.idKategori
             }
