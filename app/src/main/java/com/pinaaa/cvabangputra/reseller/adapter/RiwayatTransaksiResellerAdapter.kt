@@ -1,16 +1,25 @@
 package com.pinaaa.cvabangputra.reseller.adapter
 
 
+import android.content.ContentValues.TAG
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pinaaa.cvabangputra.data.remote.ApiConfig
 import com.pinaaa.cvabangputra.data.remote.response.reseller.DataTransaksiItem
+import com.pinaaa.cvabangputra.data.remote.response.reseller.FeedbackResponse
 import com.pinaaa.cvabangputra.databinding.TransaksiItemBinding
 import com.pinaaa.cvabangputra.di.injection.rupiahFormat
+import com.pinaaa.cvabangputra.reseller.ui.DetailBarangActivityReseller
+import com.pinaaa.cvabangputra.reseller.ui.RiwayatActivityReseller
+import retrofit2.Call
+import retrofit2.Callback
 
 class RiwayatTransaksiResellerAdapter : ListAdapter<DataTransaksiItem, RiwayatTransaksiResellerAdapter.ViewHolder>(DIFF_CALLBACK){
 
@@ -41,6 +50,45 @@ class RiwayatTransaksiResellerAdapter : ListAdapter<DataTransaksiItem, RiwayatTr
             } else if (data.status == "dikirim"){
                 binding.btnUbahStatusTransaksi.text = "Barang Sudah diterima"
                 binding.btnUbahStatusTransaksi.isEnabled = true
+                binding.btnUbahStatusTransaksi.setOnClickListener {
+                    // Handle button click to update status
+                    apiConfig.getApiService().updateStatusTransaksi(data.id, "selesai").enqueue(object : Callback<FeedbackResponse> {
+                        override fun onResponse(call: Call<FeedbackResponse>, response: retrofit2.Response<FeedbackResponse>) {
+                            if (response.isSuccessful) {
+                                binding.btnUbahStatusTransaksi.text = "Barang Sudah diterima"
+                                binding.btnUbahStatusTransaksi.isEnabled = false
+
+                                Toast.makeText(
+                                    itemView.context,
+                                    "Status transaksi berhasil diubah",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+
+//                                val intent = Intent(itemView.context, RiwayatActivityReseller::class.java)
+//                                itemView.context.startActivity(intent)
+                                // tambahkan finish() jika ingin menutup activity ini
+                                (itemView.context as RiwayatActivityReseller).finish()
+                            } else {
+                                Toast.makeText(
+                                    itemView.context,
+                                    "Gagal mengubah status transaksi",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                Log.e(TAG, "onResponse: " + response.message() )
+                            }
+                        }
+
+                        override fun onFailure(call: Call<FeedbackResponse>, t: Throwable) {
+                            Toast.makeText(
+                                itemView.context,
+                                "Gagal mengubah status transaksi: ${t.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.e(TAG, "onFailure: " + t.message )
+                        }
+                    })
+                }
             } else {
                 binding.btnUbahStatusTransaksi.visibility = View.GONE
             }

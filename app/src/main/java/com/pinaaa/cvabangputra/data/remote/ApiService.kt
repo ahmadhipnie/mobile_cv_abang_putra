@@ -217,6 +217,14 @@ interface ApiService {
         @Field("total_harga") total_harga: Int,
     ): Call<FeedbackResponse>
 
+
+    @FormUrlEncoded
+    @POST("updateStatusTransaksi")
+    fun updateStatusTransaksi(
+        @Field("id") transaksiId: Int,
+        @Field("status") status: String,
+    ): Call<FeedbackResponse>
+
     @FormUrlEncoded
     @POST("getTransaksiByUserId")
     fun getTransaksiByUserId(
