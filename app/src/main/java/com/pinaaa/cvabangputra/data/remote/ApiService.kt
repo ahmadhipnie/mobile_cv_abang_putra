@@ -214,6 +214,7 @@ interface ApiService {
         @Field("barang_id") barangId: Int,
         @Field("jumlah_barang") jumlah_barang: Int,
         @Field("jenis_pengiriman") jenis_pengiriman: String,
+        @Field("alamat_pengiriman") alamat_pengiriman: String,
         @Field("total_harga") total_harga: Int,
     ): Call<FeedbackResponse>
 

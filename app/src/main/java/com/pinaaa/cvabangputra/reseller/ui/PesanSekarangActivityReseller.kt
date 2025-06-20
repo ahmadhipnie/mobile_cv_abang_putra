@@ -73,6 +73,7 @@ class PesanSekarangActivityReseller : AppCompatActivity() {
         binding.btnPesanSekarangReseller.setOnClickListener {
             val jumlahBarangStr = binding.etJumlahBarangPesanSekarangReseller.text.toString()
             val totalHargaStr = binding.etTotalHargaPesanSekarangReseller.text.toString()
+            val alamatPengiriman = binding.etAlamatPengirimanPesanSekarangReseller.text.toString()
             val jenisPengiriman = binding.spinnerPengiriman.selectedItem.toString()
 
             if (userId == 0 || idBarang == 0 || jumlahBarangStr.isEmpty() || totalHargaStr.isEmpty()) {
@@ -94,7 +95,7 @@ class PesanSekarangActivityReseller : AppCompatActivity() {
             progressDialog.show()
 
             val apiService = ApiConfig.getApiService()
-            apiService.addTransaksi(userId, idBarang, jumlahBarang,jenisPengiriman, totalHarga)
+            apiService.addTransaksi(userId, idBarang, jumlahBarang,jenisPengiriman, alamatPengiriman, totalHarga)
                 .enqueue(object : Callback<FeedbackResponse> {
                     override fun onResponse(call: Call<FeedbackResponse>, response: Response<FeedbackResponse>) {
                         progressDialog.dismiss()
