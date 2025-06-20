@@ -8,7 +8,10 @@ data class RiwayatTransaksiResponse(
 	val data: List<DataTransaksiItem>,
 
 	@field:SerializedName("status")
-	val status: String
+	val status: String,
+
+	@field:SerializedName("nama_reseller")
+	val namaReseller: String
 )
 
 data class User(
@@ -92,5 +95,11 @@ data class Barang(
 	val deskripsiBarang: String,
 
 	@field:SerializedName("stok_barang")
-	val stokBarang: Int
+	val stokBarang: Int,
+
+	@field:SerializedName("nama_reseller")
+	val namaReseller: String,
+
+	@field:SerializedName("alamat_pengiriman")
+	val alamatPengiriman: String
 )

@@ -32,6 +32,8 @@ class RiwayatTransaksiAdminAdapter : ListAdapter<DataTransaksiItem, RiwayatTrans
             binding.tvItemTotalHargaTransaksi.text = "Harga : "+rupiahFormat(data.totalHarga)
             binding.tvItemStatusTransaksi.text = data.jenisPengiriman + "(${data.status})"
             binding.tvItemJumlahBarangTransaksi.text = "Jumlah Barang : " + data.jumlahBarang.toString()
+            binding.tvItemNamaTransaksi.text = "Nama Reseller : " + data.barang.namaReseller
+            binding.tvItemAlamatTransaksi.text = "Alamat : " + data.barang.alamatPengiriman
 
             if (data.status == "diproses"){
                 binding.btnUbahStatusTransaksi.text = "ubah ke dikirim"

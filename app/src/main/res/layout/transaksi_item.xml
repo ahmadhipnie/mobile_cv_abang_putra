@@ -34,12 +34,40 @@
             android:maxLines="1"/>
 
         <TextView
-            android:id="@+id/tv_item_status_transaksi"
+            android:id="@+id/tv_item_nama_transaksi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_nama_barang"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_nama_barang"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_nama_barang"
+            tools:text="Nama :"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tv_item_alamat_transaksi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintEnd_toEndOf="@+id/tv_item_nama_transaksi"
+            card_view:layout_constraintStart_toStartOf="@+id/tv_item_nama_transaksi"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_nama_transaksi"
+            tools:text="Alamat :"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tv_item_status_transaksi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintEnd_toEndOf="@+id/tv_item_alamat_transaksi"
+            card_view:layout_constraintStart_toStartOf="@+id/tv_item_alamat_transaksi"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_alamat_transaksi"
             tools:text="status :"
             android:textSize="14sp"
             android:textColor="@color/black"
